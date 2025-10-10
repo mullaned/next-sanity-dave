@@ -13,9 +13,11 @@
     "start": "next start",
     "type-check": "tsc --noEmit",
     "typegen": "sanity typegen generate",
-    "test": "vitest run",
-    "test:watch": "vitest",
     "test:ui": "vitest --ui",
+     "test": "vitest run --reporter=verbose",
+    "test:watch": "vitest",
+    "test:storybook": "vitest run --config vitest.storybook.config.ts",
+    "test:all": "npm run test && npm run test:storybook",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
