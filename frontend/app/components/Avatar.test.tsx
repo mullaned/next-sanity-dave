@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest'
 
 describe('Avatar Component', () => {
-    it('renders correctly', () => {
-        expect(true).toBe(true);
-    });
-});
+  it('renders correctly', () => {
+    expect(true).toBe(true)
+  })
+})
