@@ -22,12 +22,14 @@ export default function CTA({ block }: CtaProps) {
 
           <Suspense fallback={null}>
             <div className="flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
-              <ResolvedLink
-                link={block.link}
-                className="rounded-full flex gap-2 mr-6 items-center bg-black hover:bg-blue focus:bg-blue py-3 px-6 text-white transition-colors duration-200"
-              >
-                {block.buttonText}
-              </ResolvedLink>
+              {block.link && (
+                <ResolvedLink
+                  link={block.link}
+                  className="rounded-full flex gap-2 mr-6 items-center bg-black hover:bg-blue focus:bg-blue py-3 px-6 text-white transition-colors duration-200"
+                >
+                  {block.buttonText}
+                </ResolvedLink>
+              )}
             </div>
           </Suspense>
         </div>

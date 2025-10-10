@@ -44,7 +44,11 @@ export const urlForImage = (source: Post['coverImage']) => {
   return imageBuilder?.image(source).auto('format')
 }
 
-export function resolveOpenGraphImage(image: Post['coverImage'], width = 1200, height = 627) {
+export function resolveOpenGraphImage(
+  image: Post['coverImage'] | undefined,
+  width = 1200,
+  height = 627,
+) {
   if (!image) return
   // biome-ignore lint/suspicious/noFocusedTests: This is Sanity's image builder .fit() method, not a test
   const url = urlForImage(image)?.width(1200).height(627).fit('crop').url()
