@@ -1,7 +1,7 @@
-import {stegaClean} from '@sanity/client/stega'
-import {Image} from 'next-sanity/image'
-import {getImageDimensions} from '@sanity/asset-utils'
-import {urlForImage} from '@/sanity/lib/utils'
+import { getImageDimensions } from '@sanity/asset-utils'
+import { stegaClean } from '@sanity/client/stega'
+import { Image } from 'next-sanity/image'
+import { urlForImage } from '@/sanity/lib/utils'
 
 interface CoverImageProps {
   image: any
@@ -9,7 +9,7 @@ interface CoverImageProps {
 }
 
 export default function CoverImage(props: CoverImageProps) {
-  const {image: source, priority} = props
+  const { image: source, priority } = props
   const image = source?.asset?._ref ? (
     <Image
       className="object-cover"

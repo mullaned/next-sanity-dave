@@ -13,8 +13,8 @@ const TypographyExamples = () => {
         <div className="prose">
           <h3>Article Title</h3>
           <p>
-            This is using the default <code>prose</code> class with no color modifier.
-            It provides beautiful typography defaults for vanilla HTML content.
+            This is using the default <code>prose</code> class with no color modifier. It provides
+            beautiful typography defaults for vanilla HTML content.
           </p>
           <ul>
             <li>Automatic spacing and sizing</li>
@@ -32,9 +32,7 @@ const TypographyExamples = () => {
             The <code>prose-gray</code> modifier applies a gray color scheme to your typography.
             This matches your project's gray color palette.
           </p>
-          <blockquote>
-            "Typography is what language looks like." — Ellen Lupton
-          </blockquote>
+          <blockquote>"Typography is what language looks like." — Ellen Lupton</blockquote>
         </div>
       </section>
 
@@ -63,8 +61,8 @@ const TypographyExamples = () => {
         <div className="prose prose-invert prose-gray">
           <h3>Inverted Colors</h3>
           <p>
-            Use <code>prose-invert</code> for dark backgrounds. It automatically adjusts
-            all typography colors for optimal readability on dark surfaces.
+            Use <code>prose-invert</code> for dark backgrounds. It automatically adjusts all
+            typography colors for optimal readability on dark surfaces.
           </p>
           <ul>
             <li>Inverted text colors</li>
@@ -81,8 +79,8 @@ const TypographyExamples = () => {
             <p className="text-sm text-gray-600 mb-2">With max-w-prose (default)</p>
             <div className="prose prose-gray max-w-prose">
               <p>
-                By default, prose adds max-width constraints for optimal line length (65-75 characters).
-                This improves readability by preventing lines from becoming too long.
+                By default, prose adds max-width constraints for optimal line length (65-75
+                characters). This improves readability by preventing lines from becoming too long.
               </p>
             </div>
           </div>
@@ -90,8 +88,9 @@ const TypographyExamples = () => {
             <p className="text-sm text-gray-600 mb-2">With max-w-none</p>
             <div className="prose prose-gray max-w-none">
               <p>
-                Using <code>max-w-none</code> removes the width constraint, allowing typography
-                to expand to fill the available space. Useful when you want more control over the layout.
+                Using <code>max-w-none</code> removes the width constraint, allowing typography to
+                expand to fill the available space. Useful when you want more control over the
+                layout.
               </p>
             </div>
           </div>
@@ -102,11 +101,12 @@ const TypographyExamples = () => {
         <h2 className="text-2xl font-bold mb-4">Custom Link Styling</h2>
         <div className="prose prose-gray prose-a:text-brand">
           <p>
-            Your project uses custom link styling with <code>prose-a:text-brand</code> to apply
-            the brand color (#f50) to links. This is configured in your PortableText component.
+            Your project uses custom link styling with <code>prose-a:text-brand</code> to apply the
+            brand color (#f50) to links. This is configured in your PortableText component.
           </p>
           <p>
-            <a href="#">This link uses the brand color</a> for visual consistency with your design system.
+            <a href="#">This link uses the brand color</a> for visual consistency with your design
+            system.
           </p>
         </div>
       </section>
@@ -115,11 +115,15 @@ const TypographyExamples = () => {
         <h2 className="text-2xl font-bold mb-4">Code Blocks</h2>
         <div className="prose prose-gray">
           <p>Typography plugin includes nice defaults for code:</p>
-          <pre><code>{`function example() {
+          <pre>
+            <code>{`function example() {
   const message = "Hello, World!";
   console.log(message);
-}`}</code></pre>
-          <p>And inline code like <code>const x = 42</code> looks great too.</p>
+}`}</code>
+          </pre>
+          <p>
+            And inline code like <code>const x = 42</code> looks great too.
+          </p>
         </div>
       </section>
 
@@ -135,19 +139,27 @@ const TypographyExamples = () => {
             </thead>
             <tbody>
               <tr>
-                <td><code>prose</code></td>
+                <td>
+                  <code>prose</code>
+                </td>
                 <td>Base typography styles</td>
               </tr>
               <tr>
-                <td><code>prose-sm</code></td>
+                <td>
+                  <code>prose-sm</code>
+                </td>
                 <td>Smaller scale</td>
               </tr>
               <tr>
-                <td><code>prose-lg</code></td>
+                <td>
+                  <code>prose-lg</code>
+                </td>
                 <td>Larger scale</td>
               </tr>
               <tr>
-                <td><code>prose-invert</code></td>
+                <td>
+                  <code>prose-invert</code>
+                </td>
                 <td>Dark mode</td>
               </tr>
             </tbody>
@@ -181,17 +193,15 @@ export const DarkModeOnly: Story = {
         </p>
         <h2>Beautiful in the Dark</h2>
         <p>
-          The inverted prose classes automatically adjust colors for optimal contrast on dark backgrounds.
-          This includes headings, body text, links, and code blocks.
+          The inverted prose classes automatically adjust colors for optimal contrast on dark
+          backgrounds. This includes headings, body text, links, and code blocks.
         </p>
         <ul>
           <li>Proper contrast ratios for accessibility</li>
           <li>Consistent styling across all elements</li>
           <li>Easy to implement with a single class</li>
         </ul>
-        <blockquote>
-          Perfect for dark mode designs and modern interfaces.
-        </blockquote>
+        <blockquote>Perfect for dark mode designs and modern interfaces.</blockquote>
       </div>
     </div>
   ),
@@ -207,25 +217,25 @@ export const BlogPostLayout: Story = {
         <h1 className="text-4xl font-bold mb-2">Blog Post Title</h1>
         <p className="text-gray-500">March 15, 2024 • 5 min read</p>
       </header>
-      
+
       <div className="prose prose-lg prose-gray">
         <p className="lead">
-          This demonstrates a typical blog post layout using the typography plugin.
-          The lead paragraph uses larger text to draw readers in.
+          This demonstrates a typical blog post layout using the typography plugin. The lead
+          paragraph uses larger text to draw readers in.
         </p>
-        
+
         <h2>Section Heading</h2>
         <p>
-          Your content flows naturally with consistent spacing and sizing.
-          The typography plugin handles all the details so you can focus on your content.
+          Your content flows naturally with consistent spacing and sizing. The typography plugin
+          handles all the details so you can focus on your content.
         </p>
-        
+
         <h3>Subsection</h3>
         <p>
-          Headings, paragraphs, lists, and other elements are automatically styled
-          with beautiful defaults that work great for blog posts and articles.
+          Headings, paragraphs, lists, and other elements are automatically styled with beautiful
+          defaults that work great for blog posts and articles.
         </p>
-        
+
         <ul>
           <li>Automatic vertical rhythm</li>
           <li>Optimal line length</li>

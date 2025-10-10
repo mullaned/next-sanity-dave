@@ -1,0 +1,50 @@
+# Dependencies
+node_modules
+**/node_modules
+
+# Build outputs
+.next
+**/.next
+dist
+**/dist
+build
+**/build
+out
+**/out
+storybook-static
+**/.storybook-static
+
+# Sanity generated files
+.sanity
+**/.sanity
+**/sanity.types.ts
+**/schema.json
+
+# Test coverage
+coverage
+**/coverage
+
+# Generated files
+*.min.js
+*.min.css
+package-lock.json
+**/package-lock.json
+yarn.lock
+**/yarn.lock
+pnpm-lock.yaml
+**/pnpm-lock.yaml
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Cache
+.cache
+**/.cache
+.eslintcache
+**/.eslintcache
+
+# Vercel
+.vercel
+**/.vercel

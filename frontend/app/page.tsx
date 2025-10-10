@@ -1,15 +1,14 @@
-import {Suspense} from 'react'
+import { PortableText } from '@portabletext/react'
 import Link from 'next/link'
-import {PortableText} from '@portabletext/react'
-
-import {AllPosts} from '@/app/components/Posts'
+import { Suspense } from 'react'
 import GetStartedCode from '@/app/components/GetStartedCode'
+import { AllPosts } from '@/app/components/Posts'
 import SideBySideIcons from '@/app/components/SideBySideIcons'
-import {settingsQuery} from '@/sanity/lib/queries'
-import {sanityFetch} from '@/sanity/lib/live'
+import { sanityFetch } from '@/sanity/lib/live'
+import { settingsQuery } from '@/sanity/lib/queries'
 
 export default async function Page() {
-  const {data: settings} = await sanityFetch({
+  const { data: settings } = await sanityFetch({
     query: settingsQuery,
   })
 
@@ -62,6 +61,7 @@ export default async function Page() {
                     viewBox="0 0 24 24"
                     className="w-4 h-4 ml-1 inline"
                     fill="currentColor"
+                    aria-hidden="true"
                   >
                     <path d="M10 6V8H5V19H16V14H18V20C18 20.5523 17.5523 21 17 21H4C3.44772 21 3 20.5523 3 20V7C3 6.44772 3.44772 6 4 6H10ZM21 3V12L17.206 8.207L11.2071 14.2071L9.79289 12.7929L15.792 6.793L12 3H21Z"></path>
                   </svg>

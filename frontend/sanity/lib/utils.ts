@@ -1,8 +1,8 @@
+import { getImageDimensions } from '@sanity/asset-utils'
 import createImageUrlBuilder from '@sanity/image-url'
-import {Link} from '@/sanity.types'
-import {dataset, projectId, studioUrl} from '@/sanity/lib/api'
-import {createDataAttribute, CreateDataAttributeProps} from 'next-sanity'
-import {getImageDimensions} from '@sanity/asset-utils'
+import { type CreateDataAttributeProps, createDataAttribute } from 'next-sanity'
+import { dataset, projectId, studioUrl } from '@/sanity/lib/api'
+import type { Link } from '@/sanity.types'
 
 const imageBuilder = createImageUrlBuilder({
   projectId: projectId || '',
@@ -19,9 +19,9 @@ export const urlForImage = (source: any) => {
   const crop = source.crop
 
   // get the image's og dimensions
-  const {width, height} = getImageDimensions(imageRef)
+  const { width, height } = getImageDimensions(imageRef)
 
-  if (Boolean(crop)) {
+  if (crop) {
     // compute the cropped image's area
     const croppedWidth = Math.floor(width * (1 - (crop.right + crop.left)))
 
@@ -42,7 +42,7 @@ export function resolveOpenGraphImage(image: any, width = 1200, height = 627) {
   if (!image) return
   const url = urlForImage(image)?.width(1200).height(627).fit('crop').url()
   if (!url) return
-  return {url, alt: image?.alt as string, width, height}
+  return { url, alt: image?.alt as string, width, height }
 }
 
 // Depending on the type of link, we need to fetch the corresponding page, post, or URL.  Otherwise return null.

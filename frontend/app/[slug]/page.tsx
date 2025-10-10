@@ -1,14 +1,13 @@
-import type {Metadata} from 'next'
+import type { Metadata } from 'next'
 import Head from 'next/head'
-
+import { PageOnboarding } from '@/app/components/Onboarding'
 import PageBuilderPage from '@/app/components/PageBuilder'
-import {sanityFetch} from '@/sanity/lib/live'
-import {getPageQuery, pagesSlugs} from '@/sanity/lib/queries'
-import {GetPageQueryResult} from '@/sanity.types'
-import {PageOnboarding} from '@/app/components/Onboarding'
+import { sanityFetch } from '@/sanity/lib/live'
+import { getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
+import type { GetPageQueryResult } from '@/sanity.types'
 
 type Props = {
-  params: Promise<{slug: string}>
+  params: Promise<{ slug: string }>
 }
 
 /**
@@ -16,7 +15,7 @@ type Props = {
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-static-params
  */
 export async function generateStaticParams() {
-  const {data} = await sanityFetch({
+  const { data } = await sanityFetch({
     query: pagesSlugs,
     // // Use the published perspective in generateStaticParams
     perspective: 'published',
@@ -31,7 +30,7 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
-  const {data: page} = await sanityFetch({
+  const { data: page } = await sanityFetch({
     query: getPageQuery,
     params,
     // Metadata should never contain stega
@@ -46,7 +45,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const params = await props.params
-  const [{data: page}] = await Promise.all([sanityFetch({query: getPageQuery, params})])
+  const [{ data: page }] = await Promise.all([sanityFetch({ query: getPageQuery, params })])
 
   if (!page?._id) {
     return (

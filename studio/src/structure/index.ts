@@ -1,6 +1,6 @@
-import {CogIcon} from '@sanity/icons'
-import type {StructureBuilder, StructureResolver} from 'sanity/structure'
+import { CogIcon } from '@sanity/icons'
 import pluralize from 'pluralize-esm'
+import type { StructureBuilder, StructureResolver } from 'sanity/structure'
 
 /**
  * Structure builder is useful whenever you want to control how documents are grouped and
