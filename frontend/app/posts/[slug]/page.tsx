@@ -1,18 +1,18 @@
-import type {Metadata, ResolvingMetadata} from 'next'
-import {notFound} from 'next/navigation'
-import {type PortableTextBlock} from 'next-sanity'
-import {Suspense} from 'react'
+import type { Metadata, ResolvingMetadata } from 'next'
+import { notFound } from 'next/navigation'
+import type { PortableTextBlock } from 'next-sanity'
+import { Suspense } from 'react'
 
 import Avatar from '@/app/components/Avatar'
 import CoverImage from '@/app/components/CoverImage'
-import {MorePosts} from '@/app/components/Posts'
 import PortableText from '@/app/components/PortableText'
-import {sanityFetch} from '@/sanity/lib/live'
-import {postPagesSlugs, postQuery} from '@/sanity/lib/queries'
-import {resolveOpenGraphImage} from '@/sanity/lib/utils'
+import { MorePosts } from '@/app/components/Posts'
+import { sanityFetch } from '@/sanity/lib/live'
+import { postPagesSlugs, postQuery } from '@/sanity/lib/queries'
+import { resolveOpenGraphImage } from '@/sanity/lib/utils'
 
 type Props = {
-  params: Promise<{slug: string}>
+  params: Promise<{ slug: string }>
 }
 
 /**
@@ -20,7 +20,7 @@ type Props = {
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-static-params
  */
 export async function generateStaticParams() {
-  const {data} = await sanityFetch({
+  const { data } = await sanityFetch({
     query: postPagesSlugs,
     // Use the published perspective in generateStaticParams
     perspective: 'published',
@@ -35,7 +35,7 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const params = await props.params
-  const {data: post} = await sanityFetch({
+  const { data: post } = await sanityFetch({
     query: postQuery,
     params,
     // Metadata should never contain stega
@@ -47,7 +47,7 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
   return {
     authors:
       post?.author?.firstName && post?.author?.lastName
-        ? [{name: `${post.author.firstName} ${post.author.lastName}`}]
+        ? [{ name: `${post.author.firstName} ${post.author.lastName}` }]
         : [],
     title: post?.title,
     description: post?.excerpt,
@@ -59,7 +59,7 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
 
 export default async function PostPage(props: Props) {
   const params = await props.params
-  const [{data: post}] = await Promise.all([sanityFetch({query: postQuery, params})])
+  const [{ data: post }] = await Promise.all([sanityFetch({ query: postQuery, params })])
 
   if (!post?._id) {
     return notFound()
@@ -77,7 +77,7 @@ export default async function PostPage(props: Props) {
                 </h2>
               </div>
               <div className="max-w-3xl flex gap-4 items-center">
-                {post.author && post.author.firstName && post.author.lastName && (
+                {post.author?.firstName && post.author.lastName && (
                   <Avatar person={post.author} date={post.date} />
                 )}
               </div>
@@ -96,7 +96,7 @@ export default async function PostPage(props: Props) {
       <div className="border-t border-gray-100 bg-gray-50">
         <div className="container py-12 lg:py-24 grid gap-12">
           <aside>
-            <Suspense>{await MorePosts({skip: post._id, limit: 2})}</Suspense>
+            <Suspense>{await MorePosts({ skip: post._id, limit: 2 })}</Suspense>
           </aside>
         </div>
       </div>

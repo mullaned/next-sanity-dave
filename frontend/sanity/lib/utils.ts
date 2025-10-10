@@ -1,15 +1,15 @@
+import { getImageDimensions } from '@sanity/asset-utils'
 import createImageUrlBuilder from '@sanity/image-url'
-import {Link} from '@/sanity.types'
-import {dataset, projectId, studioUrl} from '@/sanity/lib/api'
-import {createDataAttribute, CreateDataAttributeProps} from 'next-sanity'
-import {getImageDimensions} from '@sanity/asset-utils'
+import { type CreateDataAttributeProps, createDataAttribute } from 'next-sanity'
+import { dataset, projectId, studioUrl } from '@/sanity/lib/api'
+import type { Link, Post } from '@/sanity.types'
 
 const imageBuilder = createImageUrlBuilder({
   projectId: projectId || '',
   dataset: dataset || '',
 })
 
-export const urlForImage = (source: any) => {
+export const urlForImage = (source: Post['coverImage']) => {
   // Ensure that source image contains a valid reference
   if (!source?.asset?._ref) {
     return undefined
@@ -19,9 +19,15 @@ export const urlForImage = (source: any) => {
   const crop = source.crop
 
   // get the image's og dimensions
-  const {width, height} = getImageDimensions(imageRef)
+  const { width, height } = getImageDimensions(imageRef)
 
-  if (Boolean(crop)) {
+  if (
+    crop &&
+    crop.right !== undefined &&
+    crop.left !== undefined &&
+    crop.top !== undefined &&
+    crop.bottom !== undefined
+  ) {
     // compute the cropped image's area
     const croppedWidth = Math.floor(width * (1 - (crop.right + crop.left)))
 
@@ -38,11 +44,16 @@ export const urlForImage = (source: any) => {
   return imageBuilder?.image(source).auto('format')
 }
 
-export function resolveOpenGraphImage(image: any, width = 1200, height = 627) {
+export function resolveOpenGraphImage(
+  image: Post['coverImage'] | undefined,
+  width = 1200,
+  height = 627,
+) {
   if (!image) return
+  // biome-ignore lint/suspicious/noFocusedTests: This is Sanity's image builder .fit() method, not a test
   const url = urlForImage(image)?.width(1200).height(627).fit('crop').url()
   if (!url) return
-  return {url, alt: image?.alt as string, width, height}
+  return { url, alt: image?.alt as string, width, height }
 }
 
 // Depending on the type of link, we need to fetch the corresponding page, post, or URL.  Otherwise return null.
@@ -61,10 +72,12 @@ export function linkResolver(link: Link | undefined) {
       if (link?.page && typeof link.page === 'string') {
         return `/${link.page}`
       }
+      return null
     case 'post':
       if (link?.post && typeof link.post === 'string') {
         return `/posts/${link.post}`
       }
+      return null
     default:
       return null
   }

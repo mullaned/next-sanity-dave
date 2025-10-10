@@ -96,6 +96,42 @@ Now that you’ve deployed your Next.js application and Sanity Studio, you can o
 
 They will be able to access the deployed Studio, where you can collaborate together on creating content.
 
+## Development Tools
+
+### Biome - Fast Linting & Formatting
+
+This project is configured with [Biome](https://biomejs.dev/) for ultra-fast linting and code formatting.
+
+```bash
+# Format and lint all files
+npm run check:biome
+
+# Format only
+npm run format:biome
+
+# Lint only  
+npm run lint:biome
+
+# CI mode (no writes)
+npm run check:biome:ci
+```
+
+See [BIOME.md](./BIOME.md) for complete documentation and VS Code setup instructions.
+
+### Storybook - Component Development
+
+Storybook is set up for developing and testing UI components in isolation.
+
+```bash
+# Run Storybook
+cd frontend && npm run storybook
+
+# Build Storybook
+npm run build-storybook
+```
+
+See [frontend/.storybook/README.md](./frontend/.storybook/README.md) for more information.
+
 ## Resources
 
 - [Sanity documentation](https://www.sanity.io/docs)

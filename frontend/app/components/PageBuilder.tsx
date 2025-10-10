@@ -1,13 +1,13 @@
 'use client'
 
-import {SanityDocument} from 'next-sanity'
-import {useOptimistic} from 'next-sanity/hooks'
 import Link from 'next/link'
+import type { SanityDocument } from 'next-sanity'
+import { useOptimistic } from 'next-sanity/hooks'
 
 import BlockRenderer from '@/app/components/BlockRenderer'
-import {GetPageQueryResult} from '@/sanity.types'
-import {dataAttr} from '@/sanity/lib/utils'
-import {studioUrl} from '@/sanity/lib/api'
+import { studioUrl } from '@/sanity/lib/api'
+import { dataAttr } from '@/sanity/lib/utils'
+import type { GetPageQueryResult } from '@/sanity.types'
 
 type PageBuilderPageProps = {
   page: GetPageQueryResult
@@ -40,7 +40,7 @@ function renderSections(pageBuilderSections: PageBuilderSection[], page: GetPage
         path: `pageBuilder`,
       }).toString()}
     >
-      {pageBuilderSections.map((block: any, index: number) => (
+      {pageBuilderSections.map((block, index: number) => (
         <BlockRenderer
           key={block._key}
           index={index}
@@ -77,7 +77,7 @@ function renderEmptyState(page: GetPageQueryResult) {
   )
 }
 
-export default function PageBuilder({page}: PageBuilderPageProps) {
+export default function PageBuilder({ page }: PageBuilderPageProps) {
   const pageBuilderSections = useOptimistic<
     PageBuilderSection[] | undefined,
     SanityDocument<PageData>

@@ -1,15 +1,14 @@
 import Link from 'next/link'
-
-import {sanityFetch} from '@/sanity/lib/live'
-import {morePostsQuery, allPostsQuery} from '@/sanity/lib/queries'
-import {Post as PostType, AllPostsQueryResult} from '@/sanity.types'
+import { createDataAttribute } from 'next-sanity'
+import Avatar from '@/app/components/Avatar'
 import DateComponent from '@/app/components/Date'
 import OnBoarding from '@/app/components/Onboarding'
-import Avatar from '@/app/components/Avatar'
-import {createDataAttribute} from 'next-sanity'
+import { sanityFetch } from '@/sanity/lib/live'
+import { allPostsQuery, morePostsQuery } from '@/sanity/lib/queries'
+import type { AllPostsQueryResult } from '@/sanity.types'
 
-const Post = ({post}: {post: AllPostsQueryResult[number]}) => {
-  const {_id, title, slug, excerpt, date, author} = post
+const Post = ({ post }: { post: AllPostsQueryResult[number] }) => {
+  const { _id, title, slug, excerpt, date, author } = post
 
   const attr = createDataAttribute({
     id: _id,
@@ -32,7 +31,7 @@ const Post = ({post}: {post: AllPostsQueryResult[number]}) => {
         <p className="line-clamp-3 text-sm leading-6 text-gray-600 max-w-[70ch]">{excerpt}</p>
       </div>
       <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
-        {author && author.firstName && author.lastName && (
+        {author?.firstName && author.lastName && (
           <div className="flex items-center">
             <Avatar person={author} small={true} />
           </div>
@@ -65,10 +64,10 @@ const Posts = ({
   </div>
 )
 
-export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) => {
-  const {data} = await sanityFetch({
+export const MorePosts = async ({ skip, limit }: { skip: string; limit: number }) => {
+  const { data } = await sanityFetch({
     query: morePostsQuery,
-    params: {skip, limit},
+    params: { skip, limit },
   })
 
   if (!data || data.length === 0) {
@@ -77,7 +76,7 @@ export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) =>
 
   return (
     <Posts heading={`Recent Posts (${data?.length})`}>
-      {data?.map((post: any) => (
+      {data?.map((post) => (
         <Post key={post._id} post={post} />
       ))}
     </Posts>
@@ -85,7 +84,7 @@ export const MorePosts = async ({skip, limit}: {skip: string; limit: number}) =>
 }
 
 export const AllPosts = async () => {
-  const {data} = await sanityFetch({query: allPostsQuery})
+  const { data } = await sanityFetch({ query: allPostsQuery })
 
   if (!data || data.length === 0) {
     return <OnBoarding />
@@ -96,7 +95,7 @@ export const AllPosts = async () => {
       heading="Recent Posts"
       subHeading={`${data.length === 1 ? 'This blog post is' : `These ${data.length} blog posts are`} populated from your Sanity Studio.`}
     >
-      {data.map((post: any) => (
+      {data.map((post) => (
         <Post key={post._id} post={post} />
       ))}
     </Posts>

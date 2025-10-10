@@ -1,20 +1,21 @@
-import {stegaClean} from '@sanity/client/stega'
-import {Image} from 'next-sanity/image'
-import {getImageDimensions} from '@sanity/asset-utils'
-import {urlForImage} from '@/sanity/lib/utils'
+import { getImageDimensions } from '@sanity/asset-utils'
+import { stegaClean } from '@sanity/client/stega'
+import { Image } from 'next-sanity/image'
+import { urlForImage } from '@/sanity/lib/utils'
+import type { Post } from '@/sanity.types'
 
 interface CoverImageProps {
-  image: any
+  image: Post['coverImage']
   priority?: boolean
 }
 
 export default function CoverImage(props: CoverImageProps) {
-  const {image: source, priority} = props
+  const { image: source, priority } = props
   const image = source?.asset?._ref ? (
     <Image
       className="object-cover"
-      width={getImageDimensions(source).width}
-      height={getImageDimensions(source).height}
+      width={getImageDimensions(source as Parameters<typeof getImageDimensions>[0]).width}
+      height={getImageDimensions(source as Parameters<typeof getImageDimensions>[0]).height}
       alt={stegaClean(source?.alt) || ''}
       src={urlForImage(source)?.url() as string}
       priority={priority}

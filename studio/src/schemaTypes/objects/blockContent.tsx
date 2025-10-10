@@ -1,4 +1,4 @@
-import {defineArrayMember, defineType, defineField} from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -33,9 +33,9 @@ export const blockContent = defineType({
                 initialValue: 'href',
                 options: {
                   list: [
-                    {title: 'URL', value: 'href'},
-                    {title: 'Page', value: 'page'},
-                    {title: 'Post', value: 'post'},
+                    { title: 'URL', value: 'href' },
+                    { title: 'Page', value: 'page' },
+                    { title: 'Post', value: 'post' },
                   ],
                   layout: 'radio',
                 },
@@ -44,8 +44,9 @@ export const blockContent = defineType({
                 name: 'href',
                 title: 'URL',
                 type: 'url',
-                hidden: ({parent}) => parent?.linkType !== 'href' && parent?.linkType != null,
+                hidden: ({ parent }) => parent?.linkType !== 'href' && parent?.linkType != null,
                 validation: (Rule) =>
+                  // biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
                   Rule.custom((value, context: any) => {
                     if (context.parent?.linkType === 'href' && !value) {
                       return 'URL is required when Link Type is URL'
@@ -57,9 +58,10 @@ export const blockContent = defineType({
                 name: 'page',
                 title: 'Page',
                 type: 'reference',
-                to: [{type: 'page'}],
-                hidden: ({parent}) => parent?.linkType !== 'page',
+                to: [{ type: 'page' }],
+                hidden: ({ parent }) => parent?.linkType !== 'page',
                 validation: (Rule) =>
+                  // biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
                   Rule.custom((value, context: any) => {
                     if (context.parent?.linkType === 'page' && !value) {
                       return 'Page reference is required when Link Type is Page'
@@ -71,9 +73,10 @@ export const blockContent = defineType({
                 name: 'post',
                 title: 'Post',
                 type: 'reference',
-                to: [{type: 'post'}],
-                hidden: ({parent}) => parent?.linkType !== 'post',
+                to: [{ type: 'post' }],
+                hidden: ({ parent }) => parent?.linkType !== 'post',
                 validation: (Rule) =>
+                  // biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
                   Rule.custom((value, context: any) => {
                     if (context.parent?.linkType === 'post' && !value) {
                       return 'Post reference is required when Link Type is Post'

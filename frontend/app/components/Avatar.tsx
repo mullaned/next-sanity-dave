@@ -1,20 +1,20 @@
-import {Image} from 'next-sanity/image'
-
-import {urlForImage} from '@/sanity/lib/utils'
+import { Image } from 'next-sanity/image'
 import DateComponent from '@/app/components/Date'
+import { urlForImage } from '@/sanity/lib/utils'
+import type { Person } from '@/sanity.types'
 
 type Props = {
   person: {
     firstName: string | null
     lastName: string | null
-    picture?: any
+    picture?: Person['picture']
   }
   date?: string
   small?: boolean
 }
 
-export default function Avatar({person, date, small = false}: Props) {
-  const {firstName, lastName, picture} = person
+export default function Avatar({ person, date, small }: Props) {
+  const { firstName, lastName, picture } = person
 
   return (
     <div className="flex items-center font-mono">
@@ -29,6 +29,7 @@ export default function Avatar({person, date, small = false}: Props) {
               urlForImage(picture)
                 ?.height(small ? 64 : 96)
                 .width(small ? 64 : 96)
+                // biome-ignore lint/suspicious/noFocusedTests: This is image cropping, not a test
                 .fit('crop')
                 .url() as string
             }

@@ -5,12 +5,12 @@
  * Once you have provided a url for the environment variable NEXT_PUBLIC_SANITY_STUDIO_URL, and have content, you can delete this file.
  */
 
+import { uuid } from '@sanity/uuid'
 import Link from 'next/link'
-import {useIsPresentationTool} from 'next-sanity/hooks'
-import {createDataAttribute} from 'next-sanity'
-import {uuid} from '@sanity/uuid'
+import { createDataAttribute } from 'next-sanity'
+import { useIsPresentationTool } from 'next-sanity/hooks'
 
-import {studioUrl} from '@/sanity/lib/api'
+import { studioUrl } from '@/sanity/lib/api'
 
 type OnboardingMessageProps = {
   message: {
@@ -26,7 +26,7 @@ type OnboardingMessageProps = {
   path?: string
 }
 
-const OnboardingMessage = ({message, link, type, path}: OnboardingMessageProps) => {
+const OnboardingMessage = ({ message, link, type, path }: OnboardingMessageProps) => {
   const isPresentation = useIsPresentationTool()
 
   return (
@@ -52,6 +52,7 @@ const OnboardingMessage = ({message, link, type, path}: OnboardingMessageProps) 
           </Link>
         ) : (
           <button
+            type="button"
             className="cursor-pointer inline-flex rounded-full gap-2 items-center bg-white text-brand hover:bg-blue focus:bg-blue py-3 px-6 transition-colors duration-200"
             data-sanity={createDataAttribute({
               id: uuid(),
