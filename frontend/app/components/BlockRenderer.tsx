@@ -5,6 +5,7 @@ import Info from '@/app/components/InfoSection'
 import { dataAttr } from '@/sanity/lib/utils'
 
 type BlocksType = {
+  // biome-ignore lint/suspicious/noExplicitAny: Components have varying prop shapes
   [key: string]: React.FC<any>
 }
 

@@ -1,18 +1,19 @@
 import { Image } from 'next-sanity/image'
 import DateComponent from '@/app/components/Date'
 import { urlForImage } from '@/sanity/lib/utils'
+import type { Person } from '@/sanity.types'
 
 type Props = {
   person: {
     firstName: string | null
     lastName: string | null
-    picture?: any
+    picture?: Person['picture']
   }
   date?: string
   small?: boolean
 }
 
-export default function Avatar({ person, date, small = false }: Props) {
+export default function Avatar({ person, date, small }: Props) {
   const { firstName, lastName, picture } = person
 
   return (

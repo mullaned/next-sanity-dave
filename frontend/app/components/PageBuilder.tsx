@@ -40,7 +40,7 @@ function renderSections(pageBuilderSections: PageBuilderSection[], page: GetPage
         path: `pageBuilder`,
       }).toString()}
     >
-      {pageBuilderSections.map((block: any, index: number) => (
+      {pageBuilderSections.map((block, index: number) => (
         <BlockRenderer
           key={block._key}
           index={index}

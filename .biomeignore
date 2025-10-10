@@ -19,6 +19,7 @@ storybook-static
 **/.sanity
 **/sanity.types.ts
 **/schema.json
+**/sanity-typegen.json
 
 # Test coverage
 coverage

@@ -105,8 +105,8 @@ const TypographyExamples = () => {
             brand color (#f50) to links. This is configured in your PortableText component.
           </p>
           <p>
-            <a href="#">This link uses the brand color</a> for visual consistency with your design
-            system.
+            <a href="/example">This link uses the brand color</a> for visual consistency with your
+            design system.
           </p>
         </div>
       </section>
