@@ -28,12 +28,15 @@
     "check:biome:ci": "biome ci .",
     "import-sample-data": "cd studio && sanity dataset import sample-data.tar.gz --replace",
     "lint": "npm run lint --workspace=frontend",
-    "type-check": "npm run type-check --workspaces"
+    "test": "npm run test --workspaces --if-present",
+    "type-check": "npm run type-check --workspaces",
+    "prepare": "husky"
   },
   "prettier": "@sanity/prettier-config",
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
     "@sanity/prettier-config": "^2.0.1",
+    "husky": "^9.1.7",
     "npm-run-all2": "^5.0.2",
     "prettier": "^3.6.2"
   }
