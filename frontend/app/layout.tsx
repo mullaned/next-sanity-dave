@@ -2,11 +2,10 @@ import './globals.css'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import { draftMode } from 'next/headers'
 import { toPlainText, VisualEditing } from 'next-sanity'
 import { Toaster } from 'sonner'
-
 import DraftModeToast from '@/app/components/DraftModeToast'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
@@ -15,7 +14,6 @@ import { SanityLive, sanityFetch } from '@/sanity/lib/live'
 import { settingsQuery } from '@/sanity/lib/queries'
 import { resolveOpenGraphImage } from '@/sanity/lib/utils'
 import { handleError } from './client-utils'
-import localFont from 'next/font/local'
 
 /**
  * Generate metadata for the page.
@@ -52,14 +50,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-  display: 'swap',
-})
-
 const f37Ginger = localFont({
-  src: './fonts/F37Ginger-Bold.woff', 
+  src: './fonts/F37Ginger-Bold.woff',
   variable: '--font-ginger',
   weight: '700',
   display: 'swap',
