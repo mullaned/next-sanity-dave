@@ -47,7 +47,7 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
 // Main Sanity configuration
 export default defineConfig({
   name: 'default',
-  title: 'Sanity + Next.js Starter Template',
+  title: 'Dave Test Project - Sanity Studio',
 
   projectId,
   dataset,
@@ -132,4 +132,5 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+  basePath: '/studio', // Make sure this matches your deployment path
 })
