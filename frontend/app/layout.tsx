@@ -2,11 +2,10 @@ import './globals.css'
 
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 import { draftMode } from 'next/headers'
 import { toPlainText, VisualEditing } from 'next-sanity'
 import { Toaster } from 'sonner'
-
 import DraftModeToast from '@/app/components/DraftModeToast'
 import Footer from '@/app/components/Footer'
 import Header from '@/app/components/Header'
@@ -51,9 +50,10 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
+const f37Ginger = localFont({
+  src: './fonts/F37Ginger-Bold.woff',
+  variable: '--font-ginger',
+  weight: '700',
   display: 'swap',
 })
 
@@ -61,8 +61,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const { isEnabled: isDraftMode } = await draftMode()
 
   return (
-    <html lang="en" className={`${inter.variable} bg-white text-black`}>
-      <body>
+    <html lang="en" className={f37Ginger.variable}>
+      <body className={f37Ginger.className}>
         <section className="min-h-screen pt-24">
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />
