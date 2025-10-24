@@ -15,6 +15,7 @@ import { SanityLive, sanityFetch } from '@/sanity/lib/live'
 import { settingsQuery } from '@/sanity/lib/queries'
 import { resolveOpenGraphImage } from '@/sanity/lib/utils'
 import { handleError } from './client-utils'
+import localFont from 'next/font/local'
 
 /**
  * Generate metadata for the page.
@@ -57,12 +58,19 @@ const inter = Inter({
   display: 'swap',
 })
 
+const f37Ginger = localFont({
+  src: './fonts/F37Ginger-Bold.woff', 
+  variable: '--font-ginger',
+  weight: '700',
+  display: 'swap',
+})
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled: isDraftMode } = await draftMode()
 
   return (
-    <html lang="en" className={`${inter.variable} bg-white text-black`}>
-      <body>
+    <html lang="en" className={f37Ginger.variable}>
+      <body className={f37Ginger.className}>
         <section className="min-h-screen pt-24">
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
           <Toaster />
