@@ -28,7 +28,7 @@ const SANITY_STUDIO_PREVIEW_URL =
   process.env.SANITY_STUDIO_PREVIEW_URL ||
   (typeof window !== 'undefined' && window.location.hostname === 'localhost'
     ? 'http://localhost:3000'
-    : 'https://next-sanity-dave-studio.vercel.app/') // Replace with your Next.js Vercel URL
+    : 'https://next-sanity-dave-frontend.vercel.app/') // Replace with your Next.js Vercel URL
 
 // Define the home location for the presentation tool
 const homeLocation = {
