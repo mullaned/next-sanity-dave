@@ -18,11 +18,17 @@ import { schemaTypes } from './src/schemaTypes'
 import { structure } from './src/structure'
 
 // Environment variables for project configuration
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || '5f5fcp3b'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 
-// URL for preview functionality, defaults to localhost:3000 if not set
-const SANITY_STUDIO_PREVIEW_URL = process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000'
+// URL for preview functionality
+// On Vercel, this will be set via environment variable
+// Locally, it defaults to localhost:3000
+const SANITY_STUDIO_PREVIEW_URL =
+  process.env.SANITY_STUDIO_PREVIEW_URL ||
+  (typeof window !== 'undefined' && window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : 'https://next-sanity-dave-studio.vercel.app/') // Replace with your Next.js Vercel URL
 
 // Define the home location for the presentation tool
 const homeLocation = {
