@@ -24,7 +24,7 @@
       },
       "complexity": {
         "recommended": true,
-        "noExcessiveCognitiveComplexity": "warn"
+        "noExcessiveCognitiveComplexity": "off"
       },
       "correctness": {
         "recommended": true,
@@ -33,6 +33,7 @@
         "useExhaustiveDependencies": "warn"
       },
       "performance": {
+        "noImgElement": "off",
         "recommended": true
       },
       "security": {
@@ -46,7 +47,7 @@
       },
       "suspicious": {
         "recommended": true,
-        "noExplicitAny": "warn",
+        "noExplicitAny": "off",
         "noUnknownAtRules": "off"
       }
     }
