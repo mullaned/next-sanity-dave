@@ -16,7 +16,6 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
     .items([
       ...S.documentTypeListItems()
         // Remove the "assist.instruction.context" and "settings" content  from the list of content types
-        // biome-ignore lint/suspicious/noExplicitAny: Sanity list items don't have proper TypeScript types
         .filter((listItem: any) => !DISABLED_TYPES.includes(listItem.getId()))
         // Pluralize the title of each document type.  This is not required but just an option to consider.
         .map((listItem) => {
