@@ -208,7 +208,6 @@ All schema validation warnings were addressed with documented `biome-ignore` com
 
 #### 10-12. studio/src/schemaTypes/objects/blockContent.tsx (3 warnings)
 ```tsx
-// biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
 Rule.custom((value, context: any) => {
   if (context.parent?.linkType === 'href' && !value) {
     return 'URL is required when Link Type is URL'
@@ -237,7 +236,6 @@ Same pattern for settings validations:
 
 #### 20. studio/src/schemaTypes/documents/person.ts (1 warning)
 ```tsx
-// biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
 if ((context.document?.picture as any)?.asset?._ref && !alt) {
   return 'Required'
 }
@@ -245,7 +243,6 @@ if ((context.document?.picture as any)?.asset?._ref && !alt) {
 
 #### 21. studio/src/schemaTypes/documents/post.ts (1 warning)
 ```tsx
-// biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
 if ((context.document?.coverImage as any)?.asset?._ref && !alt) {
   return 'Required'
 }
@@ -253,7 +250,6 @@ if ((context.document?.coverImage as any)?.asset?._ref && !alt) {
 
 #### 22. studio/src/structure/index.ts (1 warning)
 ```tsx
-// biome-ignore lint/suspicious/noExplicitAny: Sanity list items don't have proper TypeScript types
 .filter((listItem: any) => !DISABLED_TYPES.includes(listItem.getId()))
 ```
 
