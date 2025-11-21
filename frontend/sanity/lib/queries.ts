@@ -35,6 +35,7 @@ export const getPageQuery = defineQuery(`
     slug,
     heading,
     subheading,
+    coverImage,
     "pageBuilder": pageBuilder[]{
       ...,
       _type == "callToAction" => {

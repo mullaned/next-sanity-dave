@@ -28,6 +28,19 @@
   --color-gray-900: #1b1d27;
   --color-gray-950: #13141b;
 
+  --color-waw-100: #cbdcd8;
+  --color-waw-200: #f1f3f5;
+  --color-waw-500: #38a169;
+  --color-waw-550: #27714a;
+  --color-waw-560: #1c5135;
+  --color-waw-700: #2a69ac;
+  --color-waw-800: #153e75;
+  --color-waw-900: #1a365d;
+
+  --color-waw-btn: #38a169;
+  --color-waw-btn-hov: #27714a;
+  --color-waw-btn-foc: #1c5135;
+
   --font-display: "f37Ginger", "sans-serif";
   --font-sans: "f37Ginger", "sans-serif";
 

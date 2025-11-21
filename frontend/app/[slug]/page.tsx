@@ -5,6 +5,9 @@ import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
 import { getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
 import type { GetPageQueryResult } from '@/sanity.types'
+import CoverImage from '@/app/components/CoverImage'
+import Image from 'next/image'
+import Link from 'next/link'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -56,11 +59,11 @@ export default async function Page(props: Props) {
   }
 
   return (
-    <div className="my-12 lg:my-24">
+    <div className="my-12 lg:my-8">
       <Head>
         <title>{page.heading}</title>
       </Head>
-      <div className="">
+      {page.heading && !page.coverImage && (
         <div className="container">
           <div className="pb-6 border-b border-gray-100">
             <div className="max-w-3xl">
@@ -73,7 +76,31 @@ export default async function Page(props: Props) {
             </div>
           </div>
         </div>
-      </div>
+      )}
+      {page?.coverImage && (
+        <div className="w-full">
+          <div className="flex flex-col md:flex-row gap-4 bg-waw-100">
+            <div className="order-2 md:order-1 flex items-center justify-center flex-1">
+              <div className="prose w-1/2">
+                <Image src="/images/logo.png" alt="logo" width={100} height={80} />
+                <h2 className="mt-0">{page.heading}</h2>
+                <p>{page.subheading}</p>
+                <Link
+                  href="https://airbnb.com/h/wawfarm"
+                  target="_blank"
+                  className="rounded-md flex gap-2 mr-6 items-center justify-center bg-waw-btn hover:bg-waw-btn-hov focus:bg-waw-btn-foc py-3 px-6 text-white transition-colors duration-200"
+                >
+                  Book Now
+                </Link>
+              </div>
+            </div>
+            <div className="order-1 md:order-2 flex-1">
+              <CoverImage image={page.coverImage} priority />
+            </div>
+          </div>
+        </div>
+      )}
+
       <PageBuilderPage page={page as GetPageQueryResult} />
     </div>
   )
