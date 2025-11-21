@@ -1,25 +1,36 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
 export default function Footer() {
   return (
     <footer className="bg-gray-50 relative">
-      <div className="absolute inset-0 bg-[url(/images/tile-grid-black.png)] bg-size-[17px] opacity-20 bg-position-[0_1]" />
-      <div className="container relative">
-        <div className="flex flex-col items-center py-28 lg:flex-row">
-          <h3 className="mb-10 text-center text-4xl font-mono leading-tight tracking-tighter lg:mb-0 lg:w-1/2 lg:pr-4 lg:text-left lg:text-2xl">
-            Built with Sanity + Next.js.
-          </h3>
-          <div className="flex flex-col gap-3 items-center justify-center lg:w-1/2 lg:flex-row lg:pl-4">
-            <a
-              href="https://github.com/sanity-io/sanity-template-nextjs-clean"
-              className="rounded-full flex gap-2 font-mono whitespace-nowrap items-center bg-black hover:bg-blue focus:bg-blue py-3 px-6 text-white transition-colors duration-200"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on GitHub
-            </a>
-            <a href="https://nextjs.org/docs" className="mx-3 hover:underline font-mono">
-              Read Next.js Documentation
-            </a>
-          </div>
+      <div className="container py-10 px-2 sm:px-6">
+        <div className="flex items-center justify-center">
+          <Image src="/images/logo.png" alt="logo" width={150} height={150} />
+        </div>
+        <div className="flex items-center justify-center mt-6">
+          <ul className="flex items-center gap-4 md:gap-6 leading-5 text-xs sm:text-base tracking-tight font-mono pl-5">
+            <li>
+              <Link href="/house" className="hover:underline">
+                House
+              </Link>
+            </li>
+            <li>
+              <Link href="/location" className="hover:underline">
+                Location
+              </Link>
+            </li>
+            <li>
+              <Link href="/wfh" className="hover:underline">
+                WFH
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="container py-5 px-2 sm:px-6 border-t border-gray-200">
+        <div className="flex">
+          <p>© {new Date().getFullYear()} WAW Farm. All rights reserved</p>
         </div>
       </div>
     </footer>

@@ -46,7 +46,6 @@ export const blockContent = defineType({
                 type: 'url',
                 hidden: ({ parent }) => parent?.linkType !== 'href' && parent?.linkType != null,
                 validation: (Rule) =>
-                  // biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
                   Rule.custom((value, context: any) => {
                     if (context.parent?.linkType === 'href' && !value) {
                       return 'URL is required when Link Type is URL'
@@ -61,7 +60,6 @@ export const blockContent = defineType({
                 to: [{ type: 'page' }],
                 hidden: ({ parent }) => parent?.linkType !== 'page',
                 validation: (Rule) =>
-                  // biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
                   Rule.custom((value, context: any) => {
                     if (context.parent?.linkType === 'page' && !value) {
                       return 'Page reference is required when Link Type is Page'
@@ -76,7 +74,6 @@ export const blockContent = defineType({
                 to: [{ type: 'post' }],
                 hidden: ({ parent }) => parent?.linkType !== 'post',
                 validation: (Rule) =>
-                  // biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
                   Rule.custom((value, context: any) => {
                     if (context.parent?.linkType === 'post' && !value) {
                       return 'Post reference is required when Link Type is Post'

@@ -60,7 +60,6 @@ export const post = defineType({
           validation: (rule) => {
             // Custom validation to ensure alt text is provided if the image is present. https://www.sanity.io/docs/validation
             return rule.custom((alt, context) => {
-              // biome-ignore lint/suspicious/noExplicitAny: Sanity validation context doesn't have proper types
               if ((context.document?.coverImage as any)?.asset?._ref && !alt) {
                 return 'Required'
               }

@@ -33,12 +33,41 @@ export const page = defineType({
       name: 'heading',
       title: 'Heading',
       type: 'string',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'subheading',
       title: 'Subheading',
       type: 'string',
+    }),
+
+    defineField({
+      name: 'coverImage',
+      title: 'Cover Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+        aiAssist: {
+          imageDescriptionField: 'alt',
+        },
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          description: 'Important for SEO and accessibility.',
+          validation: (rule) => {
+            // Custom validation to ensure alt text is provided if the image is present. https://www.sanity.io/docs/validation
+            return rule.custom((alt, context) => {
+              if ((context.document?.coverImage as any)?.asset?._ref && !alt) {
+                return 'Required'
+              }
+              return true
+            })
+          },
+        },
+      ],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'pageBuilder',
