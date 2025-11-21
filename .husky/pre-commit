@@ -1,2 +1,2 @@
 npm run format
-npm run check:biome
+npm run check:biome:ci
