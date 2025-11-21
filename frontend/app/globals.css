@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 
 @utility container {
   margin: 0 auto;
