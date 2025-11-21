@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.7/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -66,6 +66,22 @@
       "enabled": true,
       "indentWidth": 2,
       "trailingCommas": "none"
+    }
+  },
+  "css": {
+    "parser": {
+      "cssModules": true,
+      "allowWrongLineComments": true,
+      "tailwindDirectives": true
+    },
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2,
+      "lineWidth": 100,
+      "quoteStyle": "single"
+    },
+    "linter": {
+      "enabled": true
     }
   }
 }

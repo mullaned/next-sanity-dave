@@ -1,6 +1,6 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 
 @utility container {
   margin: 0 auto;
@@ -41,8 +41,8 @@
   --color-waw-btn-hov: #27714a;
   --color-waw-btn-foc: #1c5135;
 
-  --font-display: "f37Ginger", "sans-serif";
-  --font-sans: "f37Ginger", "sans-serif";
+  --font-display: 'f37Ginger', 'sans-serif';
+  --font-sans: 'f37Ginger', 'sans-serif';
 
   --default-transition-duration: 250ms;
 }
