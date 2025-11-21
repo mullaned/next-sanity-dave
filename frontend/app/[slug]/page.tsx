@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import CoverImage from '@/app/components/CoverImage'
 import { PageOnboarding } from '@/app/components/Onboarding'
 import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
 import { getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
 import type { GetPageQueryResult } from '@/sanity.types'
-import CoverImage from '@/app/components/CoverImage'
-import Image from 'next/image'
-import Link from 'next/link'
 
 type Props = {
   params: Promise<{ slug: string }>
