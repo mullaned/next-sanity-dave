@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next'
+import path from 'node:path'
 
 const nextConfig: NextConfig = {
   env: {
@@ -12,6 +13,10 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.sanity.io',
       },
     ],
+  },
+  turbopack: {
+    // Set the workspace root to avoid Turbopack warnings
+    root: path.resolve(__dirname, '..'),
   },
 }
 
