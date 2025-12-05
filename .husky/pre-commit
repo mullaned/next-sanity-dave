@@ -1,2 +1,5 @@
-npm run check:biome
 npm run format
+npm run typegen
+npm run check:biome
+npm run type-check
+

@@ -1,0 +1,35 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#1a1a1a"/>
+  
+  <!-- Image placeholder layers (stacked) -->
+  <rect x="32" y="96" width="448" height="320" rx="8" fill="#333333" opacity="0.3"/>
+  <rect x="32" y="96" width="448" height="320" rx="8" fill="#444444" opacity="0.5"/>
+  <rect x="32" y="96" width="448" height="320" rx="8" fill="#555555"/>
+  
+  <!-- Image icon on main layer -->
+  <circle cx="160" cy="200" r="24" fill="#666666"/>
+  <path d="M32 360 L160 260 L280 340 L480 200 V416 H32 V360Z" fill="#666666"/>
+  
+  <!-- Dark overlay effect -->
+  <rect x="32" y="96" width="448" height="320" rx="8" fill="#000000" opacity="0.4"/>
+  
+  <!-- Text content (centered) -->
+  <rect x="156" y="220" width="200" height="24" rx="4" fill="#ffffff"/>
+  <rect x="196" y="256" width="120" height="16" rx="4" fill="#e0e0e0"/>
+  
+  <!-- CTA Button -->
+  <rect x="196" y="288" width="120" height="36" rx="18" fill="#ffffff"/>
+  
+  <!-- Navigation arrows -->
+  <circle cx="64" cy="256" r="20" fill="#000000" opacity="0.5"/>
+  <path d="M70 256 L58 250 L58 262 Z" fill="#ffffff"/>
+  
+  <circle cx="448" cy="256" r="20" fill="#000000" opacity="0.5"/>
+  <path d="M442 256 L454 250 L454 262 Z" fill="#ffffff"/>
+  
+  <!-- Navigation dots -->
+  <circle cx="232" cy="444" r="6" fill="#ffffff"/>
+  <circle cx="256" cy="444" r="6" fill="#ffffff" opacity="0.5"/>
+  <circle cx="280" cy="444" r="6" fill="#ffffff" opacity="0.5"/>
+</svg>

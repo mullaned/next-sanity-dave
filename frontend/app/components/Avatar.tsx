@@ -7,7 +7,7 @@ type Props = {
   person: {
     firstName: string | null
     lastName: string | null
-    picture?: Person['picture']
+    picture?: Person['picture'] | null
   }
   date?: string
   small?: boolean
