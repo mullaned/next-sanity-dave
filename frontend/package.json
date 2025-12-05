@@ -12,7 +12,7 @@
     "check:biome": "biome check --write .",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "typegen": "sanity typegen generate",
+    "typegen": "cd ../studio && sanity schema extract --enforce-required-fields --path=schema.json && cd ../frontend && sanity typegen generate",
     "test:ui": "vitest --ui",
     "test": "vitest run --reporter=verbose",
     "test:watch": "vitest",

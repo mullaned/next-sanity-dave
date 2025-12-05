@@ -34,7 +34,7 @@ export type Link = {
 
 export type TextPicture = {
   _type: 'textPicture'
-  image?: {
+  image: {
     asset?: {
       _ref: string
       _type: 'reference'
@@ -47,21 +47,21 @@ export type TextPicture = {
     alt?: string
     _type: 'image'
   }
-  title?: string
+  title: string
   description?: string
   buttonText?: string
   buttonLink?: Link
-  imagePosition?: 'left' | 'right'
-  backgroundColor?: 'primary' | 'secondary'
+  imagePosition: 'left' | 'right'
+  backgroundColor: 'primary' | 'secondary'
 }
 
 export type ImageGallery = {
   _type: 'imageGallery'
-  title?: string
+  title: string
   description?: string
   buttonText?: string
   buttonLink?: Link
-  images?: Array<{
+  images: Array<{
     asset?: {
       _ref: string
       _type: 'reference'
@@ -79,8 +79,8 @@ export type ImageGallery = {
 
 export type HeroSlider = {
   _type: 'heroSlider'
-  slides?: Array<{
-    image?: {
+  slides: Array<{
+    image: {
       asset?: {
         _ref: string
         _type: 'reference'
@@ -90,7 +90,7 @@ export type HeroSlider = {
       media?: unknown
       hotspot?: SanityImageHotspot
       crop?: SanityImageCrop
-      alt?: string
+      alt: string
       _type: 'image'
     }
     _type: 'slide'
@@ -109,7 +109,7 @@ export type HeroSlider = {
 
 export type CallToAction = {
   _type: 'callToAction'
-  heading?: string
+  heading: string
   text?: string
   buttonText?: string
   link?: Link
@@ -161,7 +161,7 @@ export type Settings = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: string
+  title: string
   description?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -212,18 +212,18 @@ export type Settings = {
 
 export type SanityImageCrop = {
   _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
+  top: number
+  bottom: number
+  left: number
+  right: number
 }
 
 export type SanityImageHotspot = {
   _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
+  x: number
+  y: number
+  height: number
+  width: number
 }
 
 export type Page = {
@@ -232,11 +232,11 @@ export type Page = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  name?: string
-  slug?: Slug
+  name: string
+  slug: Slug
   heading?: string
   subheading?: string
-  coverImage?: {
+  coverImage: {
     asset?: {
       _ref: string
       _type: 'reference'
@@ -274,11 +274,11 @@ export type Post = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: string
-  slug?: Slug
+  title: string
+  slug: Slug
   content?: BlockContent
   excerpt?: string
-  coverImage?: {
+  coverImage: {
     asset?: {
       _ref: string
       _type: 'reference'
@@ -306,9 +306,9 @@ export type Person = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  firstName?: string
-  lastName?: string
-  picture?: {
+  firstName: string
+  lastName: string
+  picture: {
     asset?: {
       _ref: string
       _type: 'reference'
@@ -325,7 +325,7 @@ export type Person = {
 
 export type Slug = {
   _type: 'slug'
-  current?: string
+  current: string
   source?: string
 }
 
@@ -369,7 +369,7 @@ export type SanityAssistOutputField = {
 
 export type SanityAssistInstructionContext = {
   _type: 'sanity.assist.instruction.context'
-  reference?: {
+  reference: {
     _ref: string
     _type: 'reference'
     _weak?: boolean
@@ -402,7 +402,7 @@ export type AssistInstructionContext = {
 
 export type SanityAssistInstructionUserInput = {
   _type: 'sanity.assist.instruction.userInput'
-  message?: string
+  message: string
   description?: string
 }
 
@@ -485,9 +485,9 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: 'sanity.imageDimensions'
-  height?: number
-  width?: number
-  aspectRatio?: number
+  height: number
+  width: number
+  aspectRatio: number
 }
 
 export type SanityImageMetadata = {
@@ -605,7 +605,7 @@ export type SettingsQueryResult = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: string
+  title: string
   description?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -654,12 +654,12 @@ export type SettingsQueryResult = {
   }
 } | null
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    coverImage,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "heroSlider" => {        slides[]{          ...,          image{            ...,            asset->          }        },        buttonLink{            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        }      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },    },  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    coverImage,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "heroSlider" => {        slides[]{          _key,          _type,          image{            asset,            hotspot,            crop,            alt          }        },        heading,        subheading,        buttonText,        buttonLink{            link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }        },        autoplay,        autoplayInterval,        showDots,        showArrows,        height      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },    },  }
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
-  name: string | null
-  slug: Slug | null
+  name: string
+  slug: Slug
   heading: string | null
   subheading: string | null
   coverImage: {
@@ -674,12 +674,12 @@ export type GetPageQueryResult = {
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
-  } | null
+  }
   pageBuilder: Array<
     | {
         _key: string
         _type: 'callToAction'
-        heading?: string
+        heading: string
         text?: string
         buttonText?: string
         link: {
@@ -695,58 +695,40 @@ export type GetPageQueryResult = {
         _key: string
         _type: 'heroSlider'
         slides: Array<{
+          _key: string
+          _type: 'slide'
           image: {
             asset: {
-              _id: string
-              _type: 'sanity.imageAsset'
-              _createdAt: string
-              _updatedAt: string
-              _rev: string
-              originalFilename?: string
-              label?: string
-              title?: string
-              description?: string
-              altText?: string
-              sha1hash?: string
-              extension?: string
-              mimeType?: string
-              size?: number
-              assetId?: string
-              uploadId?: string
-              path?: string
-              url?: string
-              metadata?: SanityImageMetadata
-              source?: SanityAssetSourceData
+              _ref: string
+              _type: 'reference'
+              _weak?: boolean
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
             } | null
-            media?: unknown
-            hotspot?: SanityImageHotspot
-            crop?: SanityImageCrop
-            alt?: string
-            _type: 'image'
-          } | null
-          _type: 'slide'
-          _key: string
-        }> | null
-        heading?: string
-        subheading?: string
-        buttonText?: string
+            hotspot: SanityImageHotspot | null
+            crop: SanityImageCrop | null
+            alt: string
+          }
+        }>
+        heading: string | null
+        subheading: string | null
+        buttonText: string | null
         buttonLink: {
           link: null
         } | null
-        autoplay?: boolean
-        autoplayInterval?: number
-        showDots?: boolean
-        showArrows?: boolean
-        height?: 'full' | 'large' | 'medium' | 'small'
+        autoplay: boolean | null
+        autoplayInterval: number | null
+        showDots: boolean | null
+        showArrows: boolean | null
+        height: 'full' | 'large' | 'medium' | 'small' | null
       }
     | {
         _key: string
         _type: 'imageGallery'
-        title?: string
+        title: string
         description?: string
         buttonText?: string
         buttonLink?: Link
-        images?: Array<{
+        images: Array<{
           asset?: {
             _ref: string
             _type: 'reference'
@@ -792,7 +774,7 @@ export type GetPageQueryResult = {
     | {
         _key: string
         _type: 'textPicture'
-        image?: {
+        image: {
           asset?: {
             _ref: string
             _type: 'reference'
@@ -805,12 +787,12 @@ export type GetPageQueryResult = {
           alt?: string
           _type: 'image'
         }
-        title?: string
+        title: string
         description?: string
         buttonText?: string
         buttonLink?: Link
-        imagePosition?: 'left' | 'right'
-        backgroundColor?: 'primary' | 'secondary'
+        imagePosition: 'left' | 'right'
+        backgroundColor: 'primary' | 'secondary'
       }
   > | null
 } | null
@@ -818,12 +800,12 @@ export type GetPageQueryResult = {
 // Query: *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
 export type SitemapDataResult = Array<
   | {
-      slug: string | null
+      slug: string
       _type: 'page'
       _updatedAt: string
     }
   | {
-      slug: string | null
+      slug: string
       _type: 'post'
       _updatedAt: string
     }
@@ -833,8 +815,8 @@ export type SitemapDataResult = Array<
 export type AllPostsQueryResult = Array<{
   _id: string
   status: 'draft' | 'published'
-  title: string | 'Untitled'
-  slug: string | null
+  title: string
+  slug: string
   excerpt: string | null
   coverImage: {
     asset?: {
@@ -848,11 +830,11 @@ export type AllPostsQueryResult = Array<{
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
-  } | null
+  }
   date: string
   author: {
-    firstName: string | null
-    lastName: string | null
+    firstName: string
+    lastName: string
     picture: {
       asset?: {
         _ref: string
@@ -865,7 +847,7 @@ export type AllPostsQueryResult = Array<{
       crop?: SanityImageCrop
       alt?: string
       _type: 'image'
-    } | null
+    }
   } | null
 }>
 // Variable: morePostsQuery
@@ -873,8 +855,8 @@ export type AllPostsQueryResult = Array<{
 export type MorePostsQueryResult = Array<{
   _id: string
   status: 'draft' | 'published'
-  title: string | 'Untitled'
-  slug: string | null
+  title: string
+  slug: string
   excerpt: string | null
   coverImage: {
     asset?: {
@@ -888,11 +870,11 @@ export type MorePostsQueryResult = Array<{
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
-  } | null
+  }
   date: string
   author: {
-    firstName: string | null
-    lastName: string | null
+    firstName: string
+    lastName: string
     picture: {
       asset?: {
         _ref: string
@@ -905,7 +887,7 @@ export type MorePostsQueryResult = Array<{
       crop?: SanityImageCrop
       alt?: string
       _type: 'image'
-    } | null
+    }
   } | null
 }>
 // Variable: postQuery
@@ -935,8 +917,8 @@ export type PostQueryResult = {
   }> | null
   _id: string
   status: 'draft' | 'published'
-  title: string | 'Untitled'
-  slug: string | null
+  title: string
+  slug: string
   excerpt: string | null
   coverImage: {
     asset?: {
@@ -950,11 +932,11 @@ export type PostQueryResult = {
     crop?: SanityImageCrop
     alt?: string
     _type: 'image'
-  } | null
+  }
   date: string
   author: {
-    firstName: string | null
-    lastName: string | null
+    firstName: string
+    lastName: string
     picture: {
       asset?: {
         _ref: string
@@ -967,18 +949,18 @@ export type PostQueryResult = {
       crop?: SanityImageCrop
       alt?: string
       _type: 'image'
-    } | null
+    }
   } | null
 } | null
 // Variable: postPagesSlugs
 // Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current}
 export type PostPagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
 }>
 // Variable: pagesSlugs
 // Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
 export type PagesSlugsResult = Array<{
-  slug: string | null
+  slug: string
 }>
 
 // Query TypeMap
@@ -986,7 +968,7 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "settings"][0]': SettingsQueryResult
-    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    coverImage,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "heroSlider" => {\n        slides[]{\n          ...,\n          image{\n            ...,\n            asset->\n          }\n        },\n        buttonLink{\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        }\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n    },\n  }\n': GetPageQueryResult
+    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    coverImage,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "heroSlider" => {\n        slides[]{\n          _key,\n          _type,\n          image{\n            asset,\n            hotspot,\n            crop,\n            alt\n          }\n        },\n        heading,\n        subheading,\n        buttonText,\n        buttonLink{\n          \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n\n        },\n        autoplay,\n        autoplayInterval,\n        showDots,\n        showArrows,\n        height\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n    },\n  }\n': GetPageQueryResult
     '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult
