@@ -45,7 +45,7 @@ export const urlForImage = (source: Post['coverImage']) => {
 }
 
 export function resolveOpenGraphImage(
-  image: Post['coverImage'] | undefined,
+  image: Post['coverImage'] | undefined | null,
   width = 1200,
   height = 627,
 ) {

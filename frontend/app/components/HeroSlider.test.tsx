@@ -151,7 +151,8 @@ describe('HeroSliderComponent', () => {
       const mockBlock = createMockBlock({ slides: [] })
       const { container } = render(<HeroSliderComponent block={mockBlock} />)
 
-      expect(container.firstChild).toBeFalsy()
+      expect(screen.getByText('Hero Slider')).toBeTruthy()
+      expect(screen.getByText('No slides added yet. Add slides in Sanity Studio.')).toBeTruthy()
     })
   })
 
