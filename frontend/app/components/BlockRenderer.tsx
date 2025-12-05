@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Cta from '@/app/components/Cta'
+import HeroSliderComponent from '@/app/components/HeroSlider'
 import ImageGalleryComponent from '@/app/components/ImageGallery'
 import Info from '@/app/components/InfoSection'
 import TextPictureComponent from '@/app/components/TextPicture'
@@ -16,14 +17,15 @@ type BlockType = {
 }
 
 type BlockProps = {
-  index: number
-  block: BlockType
-  pageId: string
-  pageType: string
+  readonly index: number
+  readonly block: BlockType
+  readonly pageId: string
+  readonly pageType: string
 }
 
 const Blocks: BlocksType = {
   callToAction: Cta,
+  heroSlider: HeroSliderComponent,
   imageGallery: ImageGalleryComponent,
   infoSection: Info,
   textPicture: TextPictureComponent,
@@ -34,7 +36,7 @@ const Blocks: BlocksType = {
  */
 export default function BlockRenderer({ block, index, pageId, pageType }: BlockProps) {
   // Block does exist
-  if (typeof Blocks[block._type] !== 'undefined') {
+  if (Blocks[block._type] !== undefined) {
     return (
       <div
         key={block._key}

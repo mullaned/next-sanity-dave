@@ -75,6 +75,7 @@ export const page = defineType({
       type: 'array',
       of: [
         { type: 'callToAction' },
+        { type: 'heroSlider' },
         { type: 'imageGallery' },
         { type: 'infoSection' },
         { type: 'textPicture' },

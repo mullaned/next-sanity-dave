@@ -41,6 +41,29 @@ export const getPageQuery = defineQuery(`
       _type == "callToAction" => {
         ${linkFields},
       },
+      _type == "heroSlider" => {
+        slides[]{
+          _key,
+          _type,
+          image{
+            asset,
+            hotspot,
+            crop,
+            alt
+          }
+        },
+        heading,
+        subheading,
+        buttonText,
+        buttonLink{
+          ${linkFields}
+        },
+        autoplay,
+        autoplayInterval,
+        showDots,
+        showArrows,
+        height
+      },
       _type == "infoSection" => {
         content[]{
           ...,

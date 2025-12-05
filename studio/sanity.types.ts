@@ -77,6 +77,36 @@ export type ImageGallery = {
   }>
 }
 
+export type HeroSlider = {
+  _type: 'heroSlider'
+  slides?: Array<{
+    image?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt?: string
+      _type: 'image'
+    }
+    _type: 'slide'
+    _key: string
+  }>
+  heading?: string
+  subheading?: string
+  buttonText?: string
+  buttonLink?: Link
+  autoplay?: boolean
+  autoplayInterval?: number
+  showDots?: boolean
+  showArrows?: boolean
+  height?: 'small' | 'medium' | 'large' | 'full'
+}
+
 export type CallToAction = {
   _type: 'callToAction'
   heading?: string
@@ -223,6 +253,9 @@ export type Page = {
     | ({
         _key: string
       } & CallToAction)
+    | ({
+        _key: string
+      } & HeroSlider)
     | ({
         _key: string
       } & ImageGallery)
@@ -531,6 +564,7 @@ export type AllSanitySchemaTypes =
   | Link
   | TextPicture
   | ImageGallery
+  | HeroSlider
   | CallToAction
   | InfoSection
   | BlockContent
