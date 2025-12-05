@@ -3,6 +3,7 @@ import { person } from './documents/person'
 import { post } from './documents/post'
 import { blockContent } from './objects/blockContent'
 import { callToAction } from './objects/callToAction'
+import { imageGallery } from './objects/imageGallery'
 import { infoSection } from './objects/infoSection'
 import { link } from './objects/link'
 import { textPicture } from './objects/textPicture'
@@ -21,6 +22,7 @@ export const schemaTypes = [
   blockContent,
   infoSection,
   callToAction,
+  imageGallery,
   textPicture,
   link,
 ]

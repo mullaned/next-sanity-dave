@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Cta from '@/app/components/Cta'
+import ImageGalleryComponent from '@/app/components/ImageGallery'
 import Info from '@/app/components/InfoSection'
 import TextPictureComponent from '@/app/components/TextPicture'
 import { dataAttr } from '@/sanity/lib/utils'
@@ -23,6 +24,7 @@ type BlockProps = {
 
 const Blocks: BlocksType = {
   callToAction: Cta,
+  imageGallery: ImageGalleryComponent,
   infoSection: Info,
   textPicture: TextPictureComponent,
 }
