@@ -53,5 +53,8 @@
     "npm-run-all2": "^5.0.2",
     "prettier": "^3.6.2",
     "semantic-release": "^25.0.2"
+  },
+  "dependencies": {
+    "next-seo": "^7.0.1"
   }
 }
