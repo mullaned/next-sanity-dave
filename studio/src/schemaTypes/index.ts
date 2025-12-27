@@ -1,6 +1,7 @@
 import { page } from './documents/page'
 import { person } from './documents/person'
 import { post } from './documents/post'
+import { redirect } from './documents/redirect'
 import { blockContent } from './objects/blockContent'
 import { callToAction } from './objects/callToAction'
 import { heroSlider } from './objects/heroSlider'
@@ -20,6 +21,7 @@ export const schemaTypes = [
   page,
   post,
   person,
+  redirect,
   // Objects
   blockContent,
   infoSection,

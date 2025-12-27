@@ -14,6 +14,7 @@ import {
 } from 'sanity/presentation'
 import { structureTool } from 'sanity/structure'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
+import { createRedirectsAction } from './src/lib/actions/createRedirectsAction'
 import { schemaTypes } from './src/schemaTypes'
 import { structure } from './src/structure'
 
@@ -138,5 +139,19 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+
+  // Document actions configuration
+  document: {
+    actions: (prev, context) => {
+      // Replace the default publish action with our custom one for posts and pages
+      if (['post', 'page'].includes(context.schemaType)) {
+        return prev.map((originalAction) =>
+          originalAction.action === 'publish' ? createRedirectsAction : originalAction,
+        )
+      }
+      return prev
+    },
+  },
+
   basePath: '/studio', // Make sure this matches your deployment path
 })

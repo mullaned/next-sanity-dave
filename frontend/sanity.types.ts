@@ -179,6 +179,17 @@ export type BlockContent = Array<{
   _key: string
 }>
 
+export type Redirect = {
+  _id: string
+  _type: 'redirect'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  from: string
+  to: string
+  permanent?: boolean
+}
+
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -596,6 +607,7 @@ export type AllSanitySchemaTypes =
   | CallToAction
   | InfoSection
   | BlockContent
+  | Redirect
   | Settings
   | SanityImageCrop
   | SanityImageHotspot
