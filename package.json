@@ -1,5 +1,6 @@
 {
   "name": "next-sanity-dave",
+  "version": "0.0.0",
   "description": "Next.js + Sanity: A Powerful Website Starter with Real-time Visual Editing",
   "keywords": [
     "Sanity",
@@ -9,9 +10,13 @@
     "Live Content API (LCAPI)",
     "Real-time"
   ],
-  "homepage": "https://github.com/sanity-io/sanity-template-nextjs-clean#readme",
+  "homepage": "https://github.com/mullaned/next-sanity-dave#readme",
   "bugs": {
-    "url": "https://github.com/sanity-io/sanity-template-nextjs-clean/issues"
+    "url": "https://github.com/mullaned/next-sanity-dave/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mullaned/next-sanity-dave.git"
   },
   "workspaces": [
     "studio",
@@ -32,14 +37,20 @@
     "test": "npm run test:all --workspaces --if-present",
     "type-check": "npm run type-check --workspaces",
     "typegen": "npm run typegen --workspace=frontend",
-    "prepare": "node -e \"try { require('husky') } catch (e) { if (e.code !== 'MODULE_NOT_FOUND') throw e }\" && husky || true"
+    "prepare": "node -e \"try { require('husky') } catch (e) { if (e.code !== 'MODULE_NOT_FOUND') throw e }\" && husky || true",
+    "semantic-release": "semantic-release"
   },
   "prettier": "@sanity/prettier-config",
   "devDependencies": {
     "@biomejs/biome": "2.3.7",
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
     "@sanity/prettier-config": "^2.0.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "husky": "^9.1.7",
     "npm-run-all2": "^5.0.2",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "semantic-release": "^25.0.2"
   }
 }
