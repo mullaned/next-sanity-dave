@@ -35,6 +35,7 @@
     "import-sample-data": "cd studio && sanity dataset import sample-data.tar.gz --replace",
     "lint": "npm run lint --workspace=frontend",
     "test": "npm run test:all --workspaces --if-present",
+    "test:coverage": "npm run test:coverage --workspace=frontend",
     "type-check": "npm run type-check --workspaces",
     "typegen": "npm run typegen --workspace=frontend",
     "prepare": "node -e \"try { require('husky') } catch (e) { if (e.code !== 'MODULE_NOT_FOUND') throw e }\" && husky || true",
