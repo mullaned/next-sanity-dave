@@ -12,12 +12,14 @@ export default defineConfig({
   test: {
     globals: true,
     setupFiles: ['./.storybook/vitest.setup.ts'],
-    browser: {
-      enabled: true,
-      headless: true,
-      provider: 'playwright',
-      instances: [{ browser: 'chromium' }],
-    },
+    environment: 'jsdom',
+    // Browser mode disabled - install @vitest/browser and playwright to enable
+    // browser: {
+    //   enabled: true,
+    //   headless: true,
+    //   provider: 'playwright',
+    //   instances: [{ browser: 'chromium' }],
+    // },
   },
   resolve: {
     alias: {
