@@ -19,6 +19,8 @@ export default function CoverImage(props: CoverImageProps) {
       alt={stegaClean(source?.alt) || 'Cover image'}
       src={urlForImage(source)?.url() as string}
       priority={priority}
+      fetchPriority={priority ? 'high' : undefined}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
     />
   ) : null
 

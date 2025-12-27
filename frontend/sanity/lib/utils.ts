@@ -38,10 +38,14 @@ export const urlForImage = (source: Post['coverImage']) => {
     const top = Math.floor(height * crop.top)
 
     // gather into a url
-    return imageBuilder?.image(source).rect(left, top, croppedWidth, croppedHeight).auto('format')
+    return imageBuilder
+      ?.image(source)
+      .rect(left, top, croppedWidth, croppedHeight)
+      .auto('format')
+      .quality(85)
   }
 
-  return imageBuilder?.image(source).auto('format')
+  return imageBuilder?.image(source).auto('format').quality(85)
 }
 
 export function resolveOpenGraphImage(

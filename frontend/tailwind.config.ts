@@ -97,6 +97,12 @@ export default {
       fontFamily: {
         sans: ['var(--font-ginger)', 'system-ui', 'sans-serif'],
       },
+      // Custom button colors with better contrast for accessibility
+      backgroundColor: {
+        'waw-btn': '#2f855a', // Darker green for better contrast (was #38a169)
+        'waw-btn-hov': '#276749',
+        'waw-btn-foc': '#22543d',
+      },
       keyframes: {
         slideInFromBottom: {
           '0%': { transform: 'translateY(100%)', opacity: '0' },
