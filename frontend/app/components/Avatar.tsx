@@ -21,7 +21,7 @@ export default function Avatar({ person, date, small }: Props) {
       {picture?.asset?._ref ? (
         <div className={`${small ? 'h-6 w-6 mr-2' : 'h-9 w-9 mr-4'}`}>
           <Image
-            alt={picture?.alt || ''}
+            alt={picture?.alt || `${firstName} ${lastName}`.trim() || 'Author avatar'}
             className="h-full rounded-full object-cover"
             height={small ? 32 : 48}
             width={small ? 32 : 48}

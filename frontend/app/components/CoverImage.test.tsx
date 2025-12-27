@@ -50,13 +50,13 @@ describe('CoverImage Component', () => {
     expect(image).not.toBeInTheDocument()
   })
 
-  it('renders empty alt when alt text is missing', () => {
+  it('renders fallback alt text when alt text is missing', () => {
     const imageWithoutAlt = {
       ...mockImage,
       alt: undefined,
     }
     render(<CoverImage image={imageWithoutAlt} />)
-    const image = screen.getByAltText('')
+    const image = screen.getByAltText('Cover image')
     expect(image).toBeInTheDocument()
   })
 

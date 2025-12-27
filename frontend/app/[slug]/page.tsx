@@ -48,7 +48,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const params = await props.params
-  const [{ data: page }] = await Promise.all([sanityFetch({ query: getPageQuery, params })])
+  const { data: page } = await sanityFetch({ query: getPageQuery, params })
 
   if (!page?._id) {
     return (
@@ -82,15 +82,17 @@ export default async function Page(props: Props) {
           <div className="flex flex-col md:flex-row gap-4 bg-waw-100">
             <div className="order-2 md:order-1 flex items-center justify-center flex-1">
               <div className="prose w-1/2">
-                <Image src="/images/logo.png" alt="logo" width={100} height={80} />
+                <Image src="/images/logo.png" alt="WAW Farm" width={100} height={80} />
                 <h2 className="mt-0">{page.heading}</h2>
                 <p>{page.subheading}</p>
                 <Link
                   href="https://airbnb.com/h/wawfarm"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-md flex gap-2 mr-6 items-center justify-center bg-waw-btn hover:bg-waw-btn-hov focus:bg-waw-btn-foc py-3 px-6 text-white transition-colors duration-200"
+                  aria-label="Book Now on Airbnb (opens in new tab)"
                 >
-                  Book Now
+                  Book Now <span className="sr-only">(opens in new tab)</span>
                 </Link>
               </div>
             </div>

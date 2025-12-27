@@ -65,6 +65,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" className={f37Ginger.variable}>
       <body className={f37Ginger.className}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-cyan-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-600"
+        >
+          Skip to main content
+        </a>
         <CookieConsentProvider>
           <section className="min-h-screen pt-24">
             {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
@@ -80,7 +86,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
             <SanityLive onError={handleError} />
             <Header />
-            <main className="">{children}</main>
+            <main id="main-content" className="">
+              {children}
+            </main>
             <Footer />
           </section>
           <SpeedInsights />

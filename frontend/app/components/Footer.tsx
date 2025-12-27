@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="bg-gray-50 relative">
       <div className="container py-10 px-2 sm:px-6">
         <div className="flex items-center justify-center">
-          <Image src="/images/logo.png" alt="logo" width={150} height={150} />
+          <Image src="/images/logo.png" alt="WAW Farm" width={150} height={150} />
         </div>
         <div className="flex items-center justify-center mt-6">
           <ul className="flex items-center gap-4 md:gap-6 leading-5 text-xs sm:text-base tracking-tight font-mono pl-5">

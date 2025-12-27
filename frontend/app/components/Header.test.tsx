@@ -11,7 +11,7 @@ describe('Header Component', () => {
 
   it('renders the logo image', async () => {
     render(await Header())
-    const logo = screen.getByAltText('logo')
+    const logo = screen.getByAltText('WAW Farm')
     expect(logo).toBeInTheDocument()
     expect(logo).toHaveAttribute('width', '100')
     expect(logo).toHaveAttribute('height', '60')
@@ -58,7 +58,7 @@ describe('Header Component', () => {
 
   it('renders Book Now button with correct attributes', async () => {
     render(await Header())
-    const bookButton = screen.getByRole('link', { name: 'Book Now' })
+    const bookButton = screen.getByRole('link', { name: 'Book Now on Airbnb (opens in new tab)' })
     expect(bookButton).toBeInTheDocument()
     expect(bookButton).toHaveAttribute('href', 'https://airbnb.com/h/wawfarm')
     expect(bookButton).toHaveAttribute('target', '_blank')
@@ -84,7 +84,7 @@ describe('Header Component', () => {
 
   it('applies button styling to Book Now link', async () => {
     render(await Header())
-    const bookButton = screen.getByRole('link', { name: 'Book Now' })
+    const bookButton = screen.getByRole('link', { name: 'Book Now on Airbnb (opens in new tab)' })
     expect(bookButton).toHaveClass('rounded-full', 'bg-waw-btn')
   })
 

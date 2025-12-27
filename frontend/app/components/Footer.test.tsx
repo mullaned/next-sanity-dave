@@ -20,7 +20,7 @@ describe('Footer Component', () => {
         <Footer />
       </CookieConsentProvider>,
     )
-    const logo = screen.getByAltText('logo')
+    const logo = screen.getByAltText('WAW Farm')
     expect(logo).toBeInTheDocument()
     expect(logo).toHaveAttribute('width', '150')
     expect(logo).toHaveAttribute('height', '150')
