@@ -79,6 +79,7 @@ export const page = defineType({
         { type: 'imageGallery' },
         { type: 'infoSection' },
         { type: 'textPicture' },
+        { type: 'videoPlayer' },
       ],
       options: {
         insertMenu: {

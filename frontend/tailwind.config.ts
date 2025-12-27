@@ -97,6 +97,20 @@ export default {
       fontFamily: {
         sans: ['var(--font-ginger)', 'system-ui', 'sans-serif'],
       },
+      keyframes: {
+        slideInFromBottom: {
+          '0%': { transform: 'translateY(100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideOutToBottom: {
+          '0%': { transform: 'translateY(0)', opacity: '1' },
+          '100%': { transform: 'translateY(100%)', opacity: '0' },
+        },
+      },
+      animation: {
+        slideInFromBottom: 'slideInFromBottom 300ms ease-in-out',
+        slideOutToBottom: 'slideOutToBottom 300ms ease-in-out',
+      },
     },
   },
   future: {

@@ -73,6 +73,16 @@ export const getPageQuery = defineQuery(`
           }
         }
       },
+      _type == "videoPlayer" => {
+        title,
+        videoUrl,
+        thumbnail,
+        aspectRatio,
+        autoplay,
+        muted,
+        loop,
+        showControls
+      },
     },
   }
 `)

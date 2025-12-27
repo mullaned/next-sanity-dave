@@ -5,6 +5,7 @@ import HeroSliderComponent from '@/app/components/HeroSlider'
 import ImageGalleryComponent from '@/app/components/ImageGallery'
 import Info from '@/app/components/InfoSection'
 import TextPictureComponent from '@/app/components/TextPicture'
+import VideoPlayerNative from '@/app/components/VideoPlayerNative'
 import { dataAttr } from '@/sanity/lib/utils'
 
 type BlocksType = {
@@ -29,6 +30,7 @@ const Blocks: BlocksType = {
   imageGallery: ImageGalleryComponent,
   infoSection: Info,
   textPicture: TextPictureComponent,
+  videoPlayer: VideoPlayerNative,
 }
 
 /**

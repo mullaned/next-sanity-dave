@@ -1,7 +1,12 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useCookieConsent } from './CookieConsentContext'
 
 export default function Footer() {
+  const { openSettings } = useCookieConsent()
+
   return (
     <footer className="bg-gray-50 relative">
       <div className="container py-10 px-2 sm:px-6">
@@ -24,6 +29,16 @@ export default function Footer() {
               <Link href="/wfh" className="hover:underline">
                 WFH
               </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={openSettings}
+                className="hover:underline"
+                aria-label="Open cookie preferences settings"
+              >
+                Cookie Settings
+              </button>
             </li>
           </ul>
         </div>
