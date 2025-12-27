@@ -15,6 +15,22 @@ export default defineConfig({
     setupFiles: ['./vitest.setup.ts'],
     include: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
     exclude: ['**/node_modules/**', '**/.next/**', '**/dist/**', '**/*.stories.{js,jsx,ts,tsx}'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'text-summary', 'html'],
+      include: ['app/**/*.{ts,tsx}'],
+      exclude: [
+        '**/*.test.{ts,tsx}',
+        '**/*.stories.{ts,tsx}',
+        '**/node_modules/**',
+        '**/.next/**',
+        '**/app/api/**',
+        '**/app/[slug]/**',
+        '**/app/posts/**',
+        '**/app/layout.tsx',
+        '**/app/page.tsx',
+      ],
+    },
   },
   resolve: {
     alias: {

@@ -2,4 +2,5 @@ npm run format
 npm run typegen
 npm run check:biome
 npm run type-check
+npm run test:coverage
 
