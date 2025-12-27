@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/mullaned/next-sanity-dave/compare/v1.0.0...v1.1.0) (2025-12-27)
+
+
+### Features
+
+* lighthouse improvements ([7652a05](https://github.com/mullaned/next-sanity-dave/commit/7652a0501570ca7f2890e842d606fa40c70e5283))
+
 # 1.0.0 (2025-12-27)
 
 
