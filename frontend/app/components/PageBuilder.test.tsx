@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import PageBuilder from './PageBuilder'
 
 // Mock the BlockRenderer component
@@ -9,9 +9,10 @@ vi.mock('@/app/components/BlockRenderer', () => ({
   ),
 }))
 
+let mockUseOptimistic: any
 // Mock next-sanity hooks
 vi.mock('next-sanity/hooks', () => ({
-  useOptimistic: vi.fn((initial) => initial),
+  useOptimistic: (...args: any[]) => mockUseOptimistic(...args),
 }))
 
 // Mock sanity utils
@@ -53,6 +54,11 @@ describe('PageBuilder Component', () => {
       },
     ],
   }
+
+  beforeEach(() => {
+    // Default mock returns the initial value
+    mockUseOptimistic = vi.fn((initial) => initial)
+  })
 
   it('renders page builder sections when content exists', () => {
     render(<PageBuilder page={mockPage} />)
@@ -162,5 +168,83 @@ describe('PageBuilder Component', () => {
   it('handles null page gracefully', () => {
     const { container } = render(<PageBuilder page={null as any} />)
     expect(container.firstChild).toBeNull()
+  })
+
+  it('handles useOptimistic with updated document data', () => {
+    const reducerFn = vi.fn()
+    mockUseOptimistic = vi.fn((initial, reducer) => {
+      reducerFn.mockImplementation(reducer)
+      return initial
+    })
+
+    render(<PageBuilder page={mockPage} />)
+
+    // Get the reducer function
+    expect(mockUseOptimistic).toHaveBeenCalled()
+    const [_initial, reducer] = mockUseOptimistic.mock.calls[0]
+
+    // Test reducer with matching document ID
+    const currentSections = mockPage.pageBuilder
+    const action = {
+      id: 'page-123',
+      document: {
+        _id: 'page-123',
+        _type: 'page',
+        pageBuilder: [
+          { _key: 'block-1', _type: 'heroSlider' },
+          { _key: 'block-3', _type: 'newBlock' },
+        ],
+      },
+    } as any
+
+    const result = reducer(currentSections, action)
+    expect(result).toBeDefined()
+    expect(result).toHaveLength(2)
+  })
+
+  it('useOptimistic ignores updates for different document IDs', () => {
+    mockUseOptimistic = vi.fn((initial, _reducer) => {
+      return initial
+    })
+
+    render(<PageBuilder page={mockPage} />)
+
+    const [_initial, reducer] = mockUseOptimistic.mock.calls[0]
+
+    const currentSections = mockPage.pageBuilder
+    const action = {
+      id: 'different-page-id',
+      document: {
+        _id: 'different-page-id',
+        _type: 'page',
+        pageBuilder: [{ _key: 'new-block', _type: 'newType' }],
+      },
+    } as any
+
+    const result = reducer(currentSections, action)
+    expect(result).toEqual(currentSections)
+  })
+
+  it('useOptimistic returns current sections when no pageBuilder in update', () => {
+    mockUseOptimistic = vi.fn((initial, _reducer) => {
+      return initial
+    })
+
+    render(<PageBuilder page={mockPage} />)
+
+    const [_initial, reducer] = mockUseOptimistic.mock.calls[0]
+
+    const currentSections = mockPage.pageBuilder
+    const action = {
+      id: 'page-123',
+      document: {
+        _id: 'page-123',
+        _type: 'page',
+        // No pageBuilder field
+      },
+    } as any
+
+    const result = reducer(currentSections, action)
+    expect(result).toEqual(currentSections)
   })
 })

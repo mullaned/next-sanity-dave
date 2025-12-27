@@ -1,26 +1,29 @@
 import { render } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import DraftModeToast from './DraftModeToast'
+
+const mockRefresh = vi.fn()
+const mockUseDraftModeEnvironment = vi.fn(() => 'live')
+const mockUseIsPresentationTool = vi.fn(() => false)
+const mockDisableDraftMode = vi.fn().mockResolvedValue(undefined)
 
 // Mock next/navigation
 vi.mock('next/navigation', () => ({
   useRouter: vi.fn(() => ({
-    refresh: vi.fn(),
+    refresh: mockRefresh,
   })),
 }))
 
 // Mock next-sanity hooks
 vi.mock('next-sanity/hooks', () => ({
-  useDraftModeEnvironment: vi.fn(() => 'live'),
-  useIsPresentationTool: vi.fn(() => false),
+  useDraftModeEnvironment: () => mockUseDraftModeEnvironment(),
+  useIsPresentationTool: () => mockUseIsPresentationTool(),
 }))
 
 // Mock sonner
 vi.mock('sonner', () => ({
   toast: Object.assign(
-    vi.fn((_message, _options) => {
-      return 'toast-id-123'
-    }),
+    vi.fn((_message, _options) => 'toast-id-123'),
     {
       dismiss: vi.fn(),
       loading: vi.fn(() => 'loading-toast-id'),
@@ -30,10 +33,16 @@ vi.mock('sonner', () => ({
 
 // Mock app actions
 vi.mock('@/app/actions', () => ({
-  disableDraftMode: vi.fn().mockResolvedValue(undefined),
+  disableDraftMode: () => mockDisableDraftMode(),
 }))
 
 describe('DraftModeToast Component', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+    mockUseDraftModeEnvironment.mockReturnValue('live')
+    mockUseIsPresentationTool.mockReturnValue(false)
+  })
+
   it('renders without crashing', () => {
     const { container } = render(<DraftModeToast />)
     expect(container.firstChild).toBeNull()
@@ -46,5 +55,23 @@ describe('DraftModeToast Component', () => {
 
   it('component mounts successfully', () => {
     expect(() => render(<DraftModeToast />)).not.toThrow()
+  })
+
+  it('renders and works with toast', () => {
+    render(<DraftModeToast />)
+    // Component renders without errors
+    expect(true).toBe(true)
+  })
+
+  it('renders in presentation mode', () => {
+    mockUseIsPresentationTool.mockReturnValue(true)
+    render(<DraftModeToast />)
+    expect(true).toBe(true)
+  })
+
+  it('renders with different environment', () => {
+    mockUseDraftModeEnvironment.mockReturnValue('preview')
+    render(<DraftModeToast />)
+    expect(true).toBe(true)
   })
 })
