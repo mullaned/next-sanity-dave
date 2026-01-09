@@ -77,7 +77,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const cspHeader = isDev
     ? [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io https://vercel.live https://va.vercel-scripts.com",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io https://vercel.live https://va.vercel-scripts.com https://unpkg.com",
+        "worker-src 'self' blob:",
         "style-src 'self' 'unsafe-inline'",
         "img-src 'self' data: https: blob:",
         "font-src 'self' data:",
@@ -107,6 +108,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" className={f37Ginger.variable}>
       <head>
+        {isDev && (
+          <script src="https://unpkg.com/react-scan/dist/auto.global.js" crossOrigin="anonymous" />
+        )}
         <meta httpEquiv="Content-Security-Policy" content={cspHeader} />
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
@@ -122,7 +126,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <section className="min-h-screen pt-24">
             {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
             <Toaster />
-            <CookieConsent />
+            {!isDev && <CookieConsent />}
             {isDraftMode && (
               <>
                 <DraftModeToast />

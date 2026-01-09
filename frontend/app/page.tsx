@@ -1,85 +1,103 @@
-import { PortableText } from '@portabletext/react'
+import type { Metadata } from 'next'
+import Head from 'next/head'
+import Image from 'next/image'
 import Link from 'next/link'
-import { Suspense } from 'react'
-import GetStartedCode from '@/app/components/GetStartedCode'
-import { AllPosts } from '@/app/components/Posts'
-import SideBySideIcons from '@/app/components/SideBySideIcons'
+import CoverImage from '@/app/components/CoverImage'
+import { PageOnboarding } from '@/app/components/Onboarding'
+import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
-import { settingsQuery } from '@/sanity/lib/queries'
+import { getPageQuery } from '@/sanity/lib/queries'
+import type { GetPageQueryResult } from '@/sanity.types'
 
-export default async function Page() {
-  const { data: settings } = await sanityFetch({
-    query: settingsQuery,
+/**
+ * Generate the static params for the page.
+ * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-static-params
+ */
+export async function generateStaticParams() {
+  return []
+}
+
+/**
+ * Generate metadata for the page.
+ * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const { data: page } = await sanityFetch({
+    query: getPageQuery,
+    params: { slug: 'home' },
+    // Metadata should never contain stega
+    stega: false,
   })
 
+  return {
+    title: page?.name,
+    description: page?.heading,
+  } satisfies Metadata
+}
+
+export default async function Page() {
+  const { data: page } = await sanityFetch({
+    query: getPageQuery,
+    params: { slug: 'home' },
+  })
+
+  if (!page?._id) {
+    return (
+      <div className="py-40">
+        <PageOnboarding />
+      </div>
+    )
+  }
+
+  // Check if page has a hero slider as first element
+  const hasHeroSlider = page?.pageBuilder?.[0]?._type === 'heroSlider'
+
   return (
-    <>
-      <div className="relative">
-        <div className="relative bg-[url(/images/tile-1-black.png)] bg-size-[5px]">
-          <div className="bg-gradient-to-b from-white w-full h-full absolute top-0"></div>
-          <div className="container">
-            <div className="relative min-h-[40vh] mx-auto max-w-2xl pt-10 xl:pt-20 pb-30 space-y-6 lg:max-w-4xl lg:px-12 flex flex-col items-center justify-center">
-              <div className="flex flex-col gap-4 items-center">
-                <div className="text-md leading-6 prose uppercase py-1 px-3 bg-white font-mono italic">
-                  A starter template for
-                </div>
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-black">
-                  <Link
-                    className="underline decoration-brand hover:text-brand underline-offset-8 hover:underline-offset-4 transition-all ease-out"
-                    href="https://sanity.io/"
-                  >
-                    Sanity
-                  </Link>
-                  +
-                  <Link
-                    className="underline decoration-black text-framework underline-offset-8 hover:underline-offset-4 transition-all ease-out"
-                    href="https://nextjs.org/"
-                  >
-                    Next.js
-                  </Link>
-                </h1>
-              </div>
+    <div className={hasHeroSlider ? '' : 'my-12 lg:my-8'}>
+      <Head>
+        <title>{page.heading}</title>
+      </Head>
+      {page.heading && !page.coverImage && (
+        <div className="container">
+          <div className="pb-6 border-b border-gray-100">
+            <div className="max-w-3xl">
+              <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
+                {page.heading}
+              </h2>
+              <p className="mt-4 text-base lg:text-lg leading-relaxed text-gray-600 uppercase font-light">
+                {page.subheading}
+              </p>
             </div>
           </div>
         </div>
-        <div className=" flex flex-col items-center">
-          <SideBySideIcons />
-          <div className="container relative mx-auto max-w-2xl pb-20 pt-10 space-y-6 lg:max-w-4xl lg:px-12 flex flex-col items-center">
-            <div className="prose sm:prose-lg md:prose-xl xl:prose-2xl text-gray-700 prose-a:text-gray-700 font-light text-center">
-              {settings?.description && <PortableText value={settings.description} />}
-              <div className="flex items-center flex-col gap-4">
-                <GetStartedCode />
+      )}
+      {page?.coverImage && (
+        <div className="w-full">
+          <div className="flex flex-col md:flex-row gap-4 bg-waw-100">
+            <div className="order-2 md:order-1 flex items-center justify-center flex-1">
+              <div className="prose w-1/2">
+                <Image src="/images/logo.png" alt="WAW Farm" width={100} height={80} />
+                <h2 className="mt-0">{page.heading}</h2>
+                <p>{page.subheading}</p>
                 <Link
-                  href="https://www.sanity.io/docs"
-                  className="inline-flex text-brand text-xs md:text-sm underline hover:text-gray-900"
+                  href="https://airbnb.com/h/wawfarm"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Sanity Documentation (opens in new tab)"
+                  className="rounded-md flex gap-2 mr-6 items-center justify-center bg-waw-btn hover:bg-waw-btn-hov focus:bg-waw-btn-foc py-3 px-6 text-white transition-colors duration-200"
+                  aria-label="Book Now on Airbnb (opens in new tab)"
                 >
-                  Sanity Documentation
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    className="w-4 h-4 ml-1 inline"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M10 6V8H5V19H16V14H18V20C18 20.5523 17.5523 21 17 21H4C3.44772 21 3 20.5523 3 20V7C3 6.44772 3.44772 6 4 6H10ZM21 3V12L17.206 8.207L11.2071 14.2071L9.79289 12.7929L15.792 6.793L12 3H21Z"></path>
-                  </svg>
-                  <span className="sr-only">(opens in new tab)</span>
+                  Book Now <span className="sr-only">(opens in new tab)</span>
                 </Link>
               </div>
             </div>
+            <div className="order-1 md:order-2 flex-1">
+              <CoverImage image={page.coverImage} priority />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="border-t border-gray-100 bg-gray-50">
-        <div className="container">
-          <aside className="py-12 sm:py-20">
-            <Suspense>{await AllPosts()}</Suspense>
-          </aside>
-        </div>
-      </div>
-    </>
+      )}
+
+      <PageBuilderPage page={page as GetPageQueryResult} />
+    </div>
   )
 }

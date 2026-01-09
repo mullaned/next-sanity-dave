@@ -3,16 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { HeroSlider } from '@/sanity.types'
 import HeroSliderComponent from './HeroSlider'
 
-// Mock the urlForImage function to avoid Sanity client issues in tests
-vi.mock('@/sanity/lib/utils', () => ({
-  urlForImage: vi.fn(() => ({
-    url: () => '/test-image.jpg',
-  })),
-  dataAttr: vi.fn(),
-  linkResolver: vi.fn(() => '/test-link'),
-}))
-
-// Mock ResolvedLink component
+// Mock the ResolvedLink component
 vi.mock('@/app/components/ResolvedLink', () => ({
   default: ({ children }: { children: React.ReactNode }) => (
     <a data-testid="resolved-link" href="/test-link">
@@ -31,49 +22,52 @@ describe('HeroSliderComponent', () => {
     vi.useRealTimers()
   })
 
-  const createMockBlock = (overrides?: Partial<HeroSlider>): HeroSlider => ({
-    _type: 'heroSlider',
-    slides: [
-      {
-        _key: 'slide1',
-        _type: 'slide',
-        image: {
-          _type: 'image',
-          asset: {
-            _ref: 'image-abc123-512x512-jpg',
-            _type: 'reference',
+  const createMockBlock = (overrides?: Partial<HeroSlider>) =>
+    ({
+      _type: 'heroSlider',
+      slides: [
+        {
+          _key: 'slide1',
+          _type: 'slide',
+          image: {
+            _type: 'image',
+            asset: {
+              _id: 'image-abc123-512x512-jpg',
+              _type: 'sanity.imageAsset',
+              url: 'https://cdn.sanity.io/images/test/production/abc123-512x512.jpg',
+            },
+            alt: 'Test slide 1',
           },
-          alt: 'Test slide 1',
         },
-      },
-      {
-        _key: 'slide2',
-        _type: 'slide',
-        image: {
-          _type: 'image',
-          asset: {
-            _ref: 'image-def456-512x512-jpg',
-            _type: 'reference',
+        {
+          _key: 'slide2',
+          _type: 'slide',
+          image: {
+            _type: 'image',
+            asset: {
+              _id: 'image-def456-512x512-jpg',
+              _type: 'sanity.imageAsset',
+              url: 'https://cdn.sanity.io/images/test/production/def456-512x512.jpg',
+            },
+            alt: 'Test slide 2',
           },
-          alt: 'Test slide 2',
         },
+      ],
+      heading: 'Test Hero Heading',
+      subheading: 'Test Hero Subheading',
+      buttonText: 'Click Here',
+      buttonLink: {
+        _type: 'link',
+        linkType: 'href',
+        href: 'https://example.com',
       },
-    ],
-    heading: 'Test Hero Heading',
-    subheading: 'Test Hero Subheading',
-    buttonText: 'Click Here',
-    buttonLink: {
-      _type: 'link',
-      linkType: 'href',
-      href: 'https://example.com',
-    },
-    autoplay: true,
-    autoplayInterval: 5,
-    showDots: true,
-    showArrows: true,
-    height: 'large',
-    ...overrides,
-  })
+      autoplay: true,
+      autoplayInterval: 5,
+      showDots: true,
+      showArrows: true,
+      height: 'large',
+      ...overrides,
+    }) as HeroSlider
 
   describe('Rendering', () => {
     it('renders the hero slider with heading and subheading', () => {

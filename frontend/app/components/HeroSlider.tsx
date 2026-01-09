@@ -5,11 +5,16 @@ import Image from 'next/image'
 import { Suspense, useCallback, useEffect, useState } from 'react'
 
 import ResolvedLink from '@/app/components/ResolvedLink'
-import { urlForImage } from '@/sanity/lib/utils'
 import type { HeroSlider } from '@/sanity.types'
 
 type HeroSliderProps = {
   readonly block: HeroSlider
+}
+
+// Utility to clean invisible Unicode characters from Sanity strings
+const cleanString = (str: string | null | undefined): string => {
+  if (!str) return ''
+  return str.trim().replace(/[\u200B-\u200D\uFEFF]/g, '')
 }
 
 export default function HeroSliderComponent({ block }: HeroSliderProps) {
@@ -30,7 +35,7 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
     large: 'h-[800px]',
     full: 'h-screen',
   }
-  const heightClass = heightClasses[block.height || 'large']
+  const heightClass = heightClasses[cleanString(block.height)] || heightClasses.large
 
   const goToSlide = useCallback(
     (index: number) => {
@@ -93,7 +98,8 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
     >
       {/* Slides */}
       {slides.map((slide: any, index: number) => {
-        const slideImageUrl = slide.image ? urlForImage(slide.image)?.url() : null
+        const slideImageUrl = slide.image?.asset?.url
+        const imageAlt = cleanString(slide.image?.alt)
         const isActive = index === currentSlide
 
         return (
@@ -104,11 +110,11 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
             }`}
           >
             {/* Background Image */}
-            {slideImageUrl && (
+            {slideImageUrl ? (
               <>
                 <Image
                   src={slideImageUrl}
-                  alt={slide.image?.alt || ''}
+                  alt={imageAlt}
                   fill
                   className="object-cover"
                   sizes="100vw"
@@ -117,6 +123,10 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-black/40 z-10" />
               </>
+            ) : (
+              <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+                <p className="text-gray-500">No image URL for slide {index + 1}</p>
+              </div>
             )}
           </div>
         )

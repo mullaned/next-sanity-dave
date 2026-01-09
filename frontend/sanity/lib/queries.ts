@@ -46,7 +46,7 @@ export const getPageQuery = defineQuery(`
           _key,
           _type,
           image{
-            asset,
+            asset->,
             hotspot,
             crop,
             alt
