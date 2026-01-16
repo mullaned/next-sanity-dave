@@ -28,10 +28,49 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   async headers() {
+    const isDev = process.env.NODE_ENV === 'development'
+    
+    // CSP for development - relaxed to allow HMR and dev tools
+    const devCSP = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io https://*.vercel.app https://vercel.live https://va.vercel-scripts.com https://unpkg.com",
+      "worker-src 'self' blob:",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https: blob:",
+      "font-src 'self' data:",
+      "connect-src 'self' https://*.sanity.io https://*.vercel.app https://vercel.live https://va.vercel-scripts.com https://vitals.vercel-insights.com wss://*.sanity.io ws://localhost:* http://localhost:*",
+      "frame-src 'self' https://www.youtube.com",
+      "media-src 'self' https:",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join('; ')
+
+    // CSP for production - strict but without problematic directives
+    const prodCSP = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://cdn.sanity.io https://*.vercel.app https://vercel.live https://va.vercel-scripts.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https: blob:",
+      "font-src 'self' data:",
+      "connect-src 'self' https://*.sanity.io https://*.vercel.app https://vercel.live https://va.vercel-scripts.com https://vitals.vercel-insights.com wss://*.sanity.io",
+      "frame-src 'self' https://www.youtube.com",
+      "media-src 'self' https:",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'self'",
+      'upgrade-insecure-requests',
+    ].join('; ')
+
     return [
       {
         source: '/:path*',
         headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: isDev ? devCSP : prodCSP,
+          },
           {
             key: 'X-Frame-Options',
             value: 'SAMEORIGIN',

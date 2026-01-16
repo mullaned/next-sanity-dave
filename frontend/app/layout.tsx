@@ -17,12 +17,6 @@ import { settingsQuery } from '@/sanity/lib/queries'
 import { resolveOpenGraphImage } from '@/sanity/lib/utils'
 import { handleError } from './client-utils'
 
-// Generate CSP nonce
-function generateNonce() {
-  const crypto = require('node:crypto')
-  return crypto.randomBytes(16).toString('base64')
-}
-
 /**
  * Generate metadata for the page.
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
@@ -55,9 +49,6 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
-    other: {
-      'csp-nonce': generateNonce(),
-    },
   }
 }
 
@@ -70,40 +61,7 @@ const f37Ginger = localFont({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled: isDraftMode } = await draftMode()
-  const nonce = generateNonce()
   const isDev = process.env.NODE_ENV === 'development'
-
-  // Build CSP - relaxed in dev, strict in production
-  const cspHeader = isDev
-    ? [
-        "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.sanity.io https://vercel.live https://va.vercel-scripts.com https://unpkg.com",
-        "worker-src 'self' blob:",
-        "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: https: blob:",
-        "font-src 'self' data:",
-        "connect-src 'self' https://*.sanity.io https://*.vercel.app https://vercel.live https://va.vercel-scripts.com https://vitals.vercel-insights.com wss://*.sanity.io ws://localhost:* http://localhost:*",
-        "frame-src 'self' https://www.youtube.com",
-        "media-src 'self' https:",
-        "object-src 'none'",
-      ].join('; ')
-    : [
-        "default-src 'self'",
-        `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://cdn.sanity.io https://vercel.live https://va.vercel-scripts.com`,
-        "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data: https: blob:",
-        "font-src 'self' data:",
-        "connect-src 'self' https://*.sanity.io https://*.vercel.app https://vercel.live https://va.vercel-scripts.com https://vitals.vercel-insights.com wss://*.sanity.io",
-        "frame-src 'self' https://www.youtube.com",
-        "media-src 'self' https:",
-        "object-src 'none'",
-        "base-uri 'self'",
-        "form-action 'self'",
-        "frame-ancestors 'self'",
-        'upgrade-insecure-requests',
-        "require-trusted-types-for 'script'",
-        "trusted-types next.js nextjs#bundler react#innerHTML default 'allow-duplicates'",
-      ].join('; ')
 
   return (
     <html lang="en" className={f37Ginger.variable}>
@@ -111,11 +69,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {isDev && (
           <script src="https://unpkg.com/react-scan/dist/auto.global.js" crossOrigin="anonymous" />
         )}
-        <meta httpEquiv="Content-Security-Policy" content={cspHeader} />
         <link rel="preconnect" href="https://cdn.sanity.io" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
       </head>
-      <body className={f37Ginger.className} nonce={isDev ? undefined : nonce}>
+      <body className={f37Ginger.className}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-cyan-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-600"
