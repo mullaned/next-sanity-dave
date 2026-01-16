@@ -1,3 +1,28 @@
+# [1.3.0](https://github.com/mullaned/next-sanity-dave/compare/v1.2.0...v1.3.0) (2026-01-16)
+
+
+### Bug Fixes
+
+* center info ([148ebab](https://github.com/mullaned/next-sanity-dave/commit/148ebab52fd7647f1d5ea3a5370ad081e162817c))
+* header ([b6a8a71](https://github.com/mullaned/next-sanity-dave/commit/b6a8a71b65e254e068f40a8f2c753c99af9937a2))
+* header ([0abf771](https://github.com/mullaned/next-sanity-dave/commit/0abf77111630a25282759c0c302407581ad8eee5))
+* header fix ([a62f13d](https://github.com/mullaned/next-sanity-dave/commit/a62f13d1a83650add0bc76fe99880c384bb793ea))
+* image warnings ([cb84de7](https://github.com/mullaned/next-sanity-dave/commit/cb84de7b8c59da2286a5d3fc863239e927399da9))
+* organise docs ([710d6d4](https://github.com/mullaned/next-sanity-dave/commit/710d6d458984e9e09f9162e3740aa2441ea044d6))
+* slider fixes ([ffa6ee4](https://github.com/mullaned/next-sanity-dave/commit/ffa6ee49315ca8daaae6e19c03cfe276533916a3))
+* slider fixes ([8eed99a](https://github.com/mullaned/next-sanity-dave/commit/8eed99ab661d0d417e014dfaae132d2f073f8203))
+* text picture update ([34f16b0](https://github.com/mullaned/next-sanity-dave/commit/34f16b0aeb7452bee4fb8d73e7f9b46bd643bed3))
+* update csp ([20ec639](https://github.com/mullaned/next-sanity-dave/commit/20ec639d8ce032c3c61a7f9579d52d0a290cab72))
+* update csp ([782b6ef](https://github.com/mullaned/next-sanity-dave/commit/782b6ef697a91467aaded1cc633816f1bd41b4b5))
+* update tests ([feead2a](https://github.com/mullaned/next-sanity-dave/commit/feead2ad7201604b88c95e300aa38a26c2ff41f4))
+
+
+### Features
+
+* rawhtml component ([5444444](https://github.com/mullaned/next-sanity-dave/commit/54444445f5005977825f67b2647d3f0025a1c9dc))
+* rawhtml component ([af80fdc](https://github.com/mullaned/next-sanity-dave/commit/af80fdc02c4fe88c979518b6f01b92b6e4546c23))
+* seo config ([66421f2](https://github.com/mullaned/next-sanity-dave/commit/66421f21ad608140c99bbba9c45ccaf7883dc609))
+
 # [1.2.0](https://github.com/mullaned/next-sanity-dave/compare/v1.1.0...v1.2.0) (2026-01-16)
 
 
