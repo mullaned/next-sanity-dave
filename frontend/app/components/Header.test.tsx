@@ -29,7 +29,6 @@ describe('Header Component', () => {
     expect(screen.getByRole('link', { name: 'House' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Location' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'WFH' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Test Page' })).toBeInTheDocument()
   })
 
   it('renders House link with correct href', async () => {
@@ -47,13 +46,7 @@ describe('Header Component', () => {
   it('renders WFH link with correct href', async () => {
     render(await Header())
     const wfhLink = screen.getByRole('link', { name: 'WFH' })
-    expect(wfhLink).toHaveAttribute('href', '/wfh')
-  })
-
-  it('renders Test Page link with correct href', async () => {
-    render(await Header())
-    const testPageLink = screen.getByRole('link', { name: 'Test Page' })
-    expect(testPageLink).toHaveAttribute('href', '/test-page')
+    expect(wfhLink).toHaveAttribute('href', '/work-from-home')
   })
 
   it('renders Book Now button with correct attributes', async () => {
@@ -91,10 +84,9 @@ describe('Header Component', () => {
   it('renders all navigation items in correct order', async () => {
     render(await Header())
     const navItems = screen.getAllByRole('listitem')
-    expect(navItems).toHaveLength(4)
+    expect(navItems).toHaveLength(3)
     expect(navItems[0]).toHaveTextContent('House')
     expect(navItems[1]).toHaveTextContent('Location')
     expect(navItems[2]).toHaveTextContent('WFH')
-    expect(navItems[3]).toHaveTextContent('Test Page')
   })
 })

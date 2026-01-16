@@ -26,13 +26,8 @@ export default async function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/wfh" className="hover:underline">
+                <Link href="/work-from-home" className="hover:underline">
                   WFH
-                </Link>
-              </li>
-              <li>
-                <Link href="/test-page" className="hover:underline">
-                  Test Page
                 </Link>
               </li>
             </ul>
