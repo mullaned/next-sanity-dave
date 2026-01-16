@@ -19,6 +19,11 @@ vi.mock('@/components/ui/dialog', () => ({
   DialogContent: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="dialog-content">{children}</div>
   ),
+  DialogTitle: ({ children, className }: { children: React.ReactNode; className?: string }) => (
+    <h2 data-testid="dialog-title" className={className}>
+      {children}
+    </h2>
+  ),
   DialogClose: ({ children, onClick }: { children: React.ReactNode; onClick: () => void }) => (
     <button type="button" data-testid="dialog-close" onClick={onClick}>
       {children}

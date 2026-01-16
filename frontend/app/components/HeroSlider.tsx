@@ -2,7 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
-import { Suspense, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import ResolvedLink from '@/app/components/ResolvedLink'
 import type { HeroSlider } from '@/sanity.types'
@@ -137,6 +137,13 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="container">
             <div className="flex flex-col items-center text-center gap-6 max-w-3xl mx-auto">
+              <Image
+                src="/images/logo-white.png"
+                alt="WAW Farm"
+                width={250}
+                height={250}
+                style={{ height: 'auto' }}
+              />
               {block.heading && (
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
                   {block.heading}
@@ -146,14 +153,12 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
                 <p className="text-xl md:text-2xl text-white/90">{block.subheading}</p>
               )}
               {block.buttonText && block.buttonLink && (
-                <Suspense fallback={null}>
-                  <ResolvedLink
-                    link={block.buttonLink}
-                    className="rounded-full inline-flex gap-2 items-center bg-white hover:bg-gray-100 focus:bg-gray-100 py-4 px-8 text-black font-semibold transition-colors duration-200"
-                  >
-                    {block.buttonText}
-                  </ResolvedLink>
-                </Suspense>
+                <ResolvedLink
+                  link={block.buttonLink}
+                  className="rounded-full inline-flex gap-2 items-center bg-white hover:bg-gray-100 focus:bg-gray-100 py-4 px-8 text-black font-semibold transition-colors duration-200"
+                >
+                  {block.buttonText}
+                </ResolvedLink>
               )}
             </div>
           </div>

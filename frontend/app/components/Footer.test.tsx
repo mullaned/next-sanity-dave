@@ -64,7 +64,7 @@ describe('Footer Component', () => {
       </CookieConsentProvider>,
     )
     const wfhLink = screen.getByRole('link', { name: 'WFH' })
-    expect(wfhLink).toHaveAttribute('href', '/wfh')
+    expect(wfhLink).toHaveAttribute('href', '/work-from-home')
   })
 
   it('renders copyright text with current year', () => {

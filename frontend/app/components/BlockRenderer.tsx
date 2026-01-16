@@ -4,6 +4,7 @@ import Cta from '@/app/components/Cta'
 import HeroSliderComponent from '@/app/components/HeroSlider'
 import ImageGalleryComponent from '@/app/components/ImageGallery'
 import Info from '@/app/components/InfoSection'
+import RawHtml from '@/app/components/RawHtml'
 import TextPictureComponent from '@/app/components/TextPicture'
 import VideoPlayerNative from '@/app/components/VideoPlayerNative'
 import { dataAttr } from '@/sanity/lib/utils'
@@ -29,6 +30,7 @@ const Blocks: BlocksType = {
   heroSlider: HeroSliderComponent,
   imageGallery: ImageGalleryComponent,
   infoSection: Info,
+  rawHtml: RawHtml,
   textPicture: TextPictureComponent,
   videoPlayer: VideoPlayerNative,
 }

@@ -47,6 +47,7 @@ export const getPageQuery = defineQuery(`
     heading,
     subheading,
     coverImage,
+    seo,
     "pageBuilder": pageBuilder[]{
       ...,
       _type == "callToAction" => {
@@ -67,7 +68,8 @@ export const getPageQuery = defineQuery(`
         subheading,
         buttonText,
         buttonLink{
-          ${linkFields}
+          ...,
+          ${linkReference}
         },
         autoplay,
         autoplayInterval,
@@ -93,6 +95,18 @@ export const getPageQuery = defineQuery(`
         muted,
         loop,
         showControls
+      },
+      _type == "textPicture" => {
+        image,
+        title,
+        description,
+        buttonText,
+        buttonLink{
+          ...,
+          ${linkReference}
+        },
+        imagePosition,
+        backgroundColor
       },
     },
   }

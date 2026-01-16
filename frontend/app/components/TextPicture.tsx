@@ -22,8 +22,8 @@ export default function TextPictureComponent({ block }: TextPictureProps) {
   const containerOrderClass = imagePosition === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'
 
   return (
-    <div className="container my-12">
-      <div className={`${bgColorClass} rounded-2xl overflow-hidden`}>
+    <div className="my-12">
+      <div className={`${bgColorClass} overflow-hidden`}>
         <div
           className={`flex flex-col ${containerOrderClass} items-center gap-8 lg:gap-12 p-8 lg:p-12`}
         >
@@ -43,29 +43,31 @@ export default function TextPictureComponent({ block }: TextPictureProps) {
           </div>
 
           {/* Content Section */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center gap-6">
-            {block.title && (
-              <h2 className="text-3xl font-bold tracking-tight text-black sm:text-4xl">
-                {block.title}
-              </h2>
-            )}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center items-center gap-6">
+            <div className="max-w-[500px]">
+              {block.title && (
+                <h2 className="text-3xl font-bold tracking-tight text-black sm:text-4xl mb-3">
+                  {block.title}
+                </h2>
+              )}
 
-            {block.description && (
-              <p className="text-lg leading-8 text-gray-600">{block.description}</p>
-            )}
+              {block.description && (
+                <p className="text-lg leading-8 text-gray-600 mb-4">{block.description}</p>
+              )}
 
-            {block.buttonText && block.buttonLink && (
-              <Suspense fallback={null}>
-                <div className="flex items-center gap-x-6">
-                  <ResolvedLink
-                    link={block.buttonLink}
-                    className="rounded-full flex gap-2 items-center bg-black hover:bg-blue focus:bg-blue py-3 px-6 text-white transition-colors duration-200"
-                  >
-                    {block.buttonText}
-                  </ResolvedLink>
-                </div>
-              </Suspense>
-            )}
+              {block.buttonText && block.buttonLink && (
+                <Suspense fallback={null}>
+                  <div className="flex items-center gap-x-6">
+                    <ResolvedLink
+                      link={block.buttonLink}
+                      className="rounded-full flex gap-2 items-center bg-black hover:bg-blue focus:bg-blue py-3 px-6 text-white transition-colors duration-200"
+                    >
+                      {block.buttonText}
+                    </ResolvedLink>
+                  </div>
+                </Suspense>
+              )}
+            </div>
           </div>
         </div>
       </div>

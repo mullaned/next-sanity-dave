@@ -31,7 +31,6 @@ describe('PageBuilder Component', () => {
   const mockPage: any = {
     _id: 'page-123',
     _type: 'page' as const,
-    name: 'Test Page',
     title: 'Test Page',
     slug: { current: 'test-page', _type: 'slug' as const },
     heading: 'Test Heading',

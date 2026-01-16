@@ -11,7 +11,7 @@ type InfoProps = {
 export default function CTA({ block }: InfoProps) {
   return (
     <div className="container my-12">
-      <div className="max-w-3xl">
+      <div className="max-w-3xl mx-auto text-center">
         {block?.heading && (
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold">{block.heading}</h2>
         )}
@@ -22,7 +22,10 @@ export default function CTA({ block }: InfoProps) {
         )}
         <div className="mt-4">
           {block?.content?.length && (
-            <PortableText className="" value={block.content as PortableTextBlock[]} />
+            <PortableText
+              className="mx-auto !text-center"
+              value={block.content as PortableTextBlock[]}
+            />
           )}
         </div>
       </div>

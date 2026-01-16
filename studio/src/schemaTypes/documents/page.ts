@@ -85,6 +85,15 @@ export const page = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
+      description: 'Search engine optimization settings for this page.',
+      options: {
+        collapsed: false,
+      },
+    }),
+    defineField({
       name: 'pageBuilder',
       title: 'Page builder',
       type: 'array',
@@ -93,6 +102,7 @@ export const page = defineType({
         { type: 'heroSlider' },
         { type: 'imageGallery' },
         { type: 'infoSection' },
+        { type: 'rawHtml' },
         { type: 'textPicture' },
         { type: 'videoPlayer' },
       ],

@@ -2,12 +2,14 @@ import type { Metadata } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { BreadcrumbJsonLd } from 'next-seo'
 import CoverImage from '@/app/components/CoverImage'
 import { PageOnboarding } from '@/app/components/Onboarding'
 import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
 import { extractSlugFromPath } from '@/sanity/lib/page-utils'
 import { getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
+import { urlForImage } from '@/sanity/lib/utils'
 import type { GetPageQueryResult } from '@/sanity.types'
 
 type Props = {
@@ -46,9 +48,54 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     stega: false,
   })
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://next-sanity-dave-frontend.vercel.app'
+  const pagePath = page?.fullPath || `/${slug}`
+  const pageUrl = `${baseUrl}${pagePath}`
+
+  // Get SEO data with fallbacks
+  const metaTitle = page?.seo?.metaTitle || page?.name
+  const metaDescription = page?.seo?.metaDescription || page?.heading
+  const ogTitle = page?.seo?.ogTitle || metaTitle
+  const ogDescription = page?.seo?.ogDescription || metaDescription || undefined
+
+  // Get OG image URL
+  const ogImage = page?.seo?.ogImage || page?.coverImage
+  const imageBuilder = ogImage ? urlForImage(ogImage)?.width(1200).height(630) : null
+  const ogImageUrl = imageBuilder ? imageBuilder.fit('crop').url() : undefined
+
   return {
-    title: page?.name,
-    description: page?.heading,
+    title: metaTitle,
+    description: metaDescription,
+    ...(page?.seo?.canonical && { alternates: { canonical: page.seo.canonical } }),
+    ...(page?.seo?.noIndex && { robots: { index: false, follow: false } }),
+    ...(page?.seo?.keywords &&
+      page.seo.keywords.length > 0 && {
+        keywords: page.seo.keywords,
+      }),
+    openGraph: {
+      title: ogTitle,
+      description: ogDescription,
+      url: pageUrl,
+      type: 'website',
+      ...(ogImageUrl && {
+        images: [
+          {
+            url: ogImageUrl,
+            width: 1200,
+            height: 630,
+            alt: ogImage?.alt || metaTitle,
+          },
+        ],
+      }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle,
+      description: ogDescription,
+      ...(ogImageUrl && {
+        images: [ogImageUrl],
+      }),
+    },
   } satisfies Metadata
 }
 
@@ -68,8 +115,29 @@ export default async function Page(props: Props) {
     )
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://next-sanity-dave-frontend.vercel.app'
+  const pagePath = page.fullPath || `/${slug}`
+  const pageUrl = `${baseUrl}${pagePath}`
+
+  // Build breadcrumb items for JSON-LD
+  const breadcrumbItems = page.parent
+    ? [
+        {
+          name: page.parent.name,
+          item: `${baseUrl}/${page.parent.slug}`,
+        },
+        {
+          name: page.name,
+          item: pageUrl,
+        },
+      ]
+    : []
+
   return (
-    <div className="my-12 lg:my-8">
+    <div className="">
+      {/* Breadcrumb JSON-LD for hierarchical pages */}
+      {breadcrumbItems.length > 0 && <BreadcrumbJsonLd items={breadcrumbItems} />}
+
       <Head>
         <title>{page.heading}</title>
       </Head>
@@ -90,9 +158,15 @@ export default async function Page(props: Props) {
       {page?.coverImage && (
         <div className="w-full">
           <div className="flex flex-col md:flex-row gap-4 bg-waw-100">
-            <div className="order-2 md:order-1 flex items-center justify-center flex-1">
-              <div className="prose w-1/2">
-                <Image src="/images/logo.png" alt="WAW Farm" width={100} height={80} />
+            <div className="order-2 md:order-1 flex items-center justify-center flex-1 pb-4">
+              <div className="prose lg:w-1/2">
+                <Image
+                  src="/images/logo.png"
+                  alt="WAW Farm"
+                  width={100}
+                  height={80}
+                  style={{ height: 'auto' }}
+                />
                 <h2 className="mt-0">{page.heading}</h2>
                 <p>{page.subheading}</p>
                 <Link
