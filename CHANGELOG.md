@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/mullaned/next-sanity-dave/compare/v1.1.0...v1.2.0) (2026-01-16)
+
+
+### Bug Fixes
+
+* updates and hero slider ([0d70cce](https://github.com/mullaned/next-sanity-dave/commit/0d70cce6f1d755017de9bf87c225058331dd12b6))
+
+
+### Features
+
+* child pages ([ce8930d](https://github.com/mullaned/next-sanity-dave/commit/ce8930de741d7dbf06fcac26a7c58e86b17012eb))
+* use next seo ([60b0d03](https://github.com/mullaned/next-sanity-dave/commit/60b0d03709544ceac3da5bb0d79dcc52d3711d59))
+
 # [1.1.0](https://github.com/mullaned/next-sanity-dave/compare/v1.0.0...v1.1.0) (2025-12-27)
 
 
