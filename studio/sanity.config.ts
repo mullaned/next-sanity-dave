@@ -4,6 +4,7 @@
  */
 
 import { assist } from '@sanity/assist'
+import { codeInput } from '@sanity/code-input'
 import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 import {
@@ -145,6 +146,7 @@ export default defineConfig({
       structure, // Custom studio structure configuration, imported from ./src/structure.ts
     }),
     // Additional plugins for enhanced functionality
+    codeInput(),
     unsplashImageAsset(),
     assist(),
     visionTool(),

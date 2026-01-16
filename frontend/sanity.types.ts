@@ -79,6 +79,11 @@ export type TextPicture = {
   backgroundColor: 'primary' | 'secondary'
 }
 
+export type RawHtml = {
+  _type: 'rawHtml'
+  html: Code
+}
+
 export type ImageGallery = {
   _type: 'imageGallery'
   title: string
@@ -305,11 +310,22 @@ export type Page = {
       } & InfoSection)
     | ({
         _key: string
+      } & RawHtml)
+    | ({
+        _key: string
       } & TextPicture)
     | ({
         _key: string
       } & VideoPlayer)
   >
+}
+
+export type Code = {
+  _type: 'code'
+  language?: string
+  filename?: string
+  code?: string
+  highlightedLines?: Array<number>
 }
 
 export type Post = {
@@ -608,6 +624,7 @@ export type AllSanitySchemaTypes =
   | Link
   | VideoPlayer
   | TextPicture
+  | RawHtml
   | ImageGallery
   | HeroSlider
   | CallToAction
@@ -618,6 +635,7 @@ export type AllSanitySchemaTypes =
   | SanityImageCrop
   | SanityImageHotspot
   | Page
+  | Code
   | Post
   | Person
   | Slug
@@ -843,6 +861,11 @@ export type GetPageQueryResult = {
           _type: 'block'
           _key: string
         }> | null
+      }
+    | {
+        _key: string
+        _type: 'rawHtml'
+        html: Code
       }
     | {
         _key: string

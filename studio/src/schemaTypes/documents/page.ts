@@ -93,6 +93,7 @@ export const page = defineType({
         { type: 'heroSlider' },
         { type: 'imageGallery' },
         { type: 'infoSection' },
+        { type: 'rawHtml' },
         { type: 'textPicture' },
         { type: 'videoPlayer' },
       ],
