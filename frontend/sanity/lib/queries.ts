@@ -94,6 +94,18 @@ export const getPageQuery = defineQuery(`
         loop,
         showControls
       },
+      _type == "textPicture" => {
+        image,
+        title,
+        description,
+        buttonText,
+        buttonLink{
+          ...,
+          ${linkReference}
+        },
+        imagePosition,
+        backgroundColor
+      },
     },
   }
 `)
