@@ -10,7 +10,13 @@ export default async function Header() {
             {/* <span className="text-lg sm:text-2xl pl-2 font-semibold">
               {settings?.title || 'Sanity + Next.js'}
             </span> */}
-            <Image src="/images/logo-wide.png" alt="WAW Farm" width={100} height={60} />
+            <Image
+              src="/images/logo-wide.png"
+              alt="WAW Farm"
+              width={100}
+              height={60}
+              style={{ height: 'auto' }}
+            />
           </Link>
 
           <nav>

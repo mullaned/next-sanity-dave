@@ -137,7 +137,13 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="container">
             <div className="flex flex-col items-center text-center gap-6 max-w-3xl mx-auto">
-              <Image src="/images/logo-white.png" alt="WAW Farm" width={250} height={250} />
+              <Image
+                src="/images/logo-white.png"
+                alt="WAW Farm"
+                width={250}
+                height={250}
+                style={{ height: 'auto' }}
+              />
               {block.heading && (
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
                   {block.heading}

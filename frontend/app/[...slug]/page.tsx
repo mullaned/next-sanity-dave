@@ -92,7 +92,13 @@ export default async function Page(props: Props) {
           <div className="flex flex-col md:flex-row gap-4 bg-waw-100">
             <div className="order-2 md:order-1 flex items-center justify-center flex-1">
               <div className="prose w-1/2">
-                <Image src="/images/logo.png" alt="WAW Farm" width={100} height={80} />
+                <Image
+                  src="/images/logo.png"
+                  alt="WAW Farm"
+                  width={100}
+                  height={80}
+                  style={{ height: 'auto' }}
+                />
                 <h2 className="mt-0">{page.heading}</h2>
                 <p>{page.subheading}</p>
                 <Link
