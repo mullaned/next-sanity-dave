@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Suspense, useCallback, useEffect, useState } from 'react'
 
 import ResolvedLink from '@/app/components/ResolvedLink'
-import { Dialog, DialogClose, DialogContent } from '@/components/ui/dialog'
+import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { urlForImage } from '@/sanity/lib/utils'
 import type { ImageGallery } from '@/sanity.types'
 
@@ -130,6 +130,9 @@ export default function ImageGalleryComponent({ block }: ImageGalleryProps) {
           className="max-w-[95vw] max-h-[95vh] w-full h-full p-0 bg-black border-none"
           aria-describedby={undefined}
         >
+          <DialogTitle className="sr-only">
+            {selectedImage?.alt || `Image ${(selectedImageIndex ?? 0) + 1} of ${totalImages}`}
+          </DialogTitle>
           <div className="relative w-full h-full flex items-center justify-center">
             {/* Close Button */}
             <DialogClose
