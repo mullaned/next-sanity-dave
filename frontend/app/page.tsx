@@ -1,8 +1,5 @@
 import type { Metadata } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import CoverImage from '@/app/components/CoverImage'
 import { PageOnboarding } from '@/app/components/Onboarding'
 import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
@@ -57,7 +54,7 @@ export default async function Page() {
       <Head>
         <title>{page.heading}</title>
       </Head>
-      {page.heading && !page.coverImage && (
+      {/* {page.heading && !page.coverImage && (
         <div className="container">
           <div className="pb-6 border-b border-gray-100">
             <div className="max-w-3xl">
@@ -95,7 +92,7 @@ export default async function Page() {
             </div>
           </div>
         </div>
-      )}
+      )} */}
 
       <PageBuilderPage page={page as GetPageQueryResult} />
     </div>

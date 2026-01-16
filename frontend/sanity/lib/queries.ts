@@ -15,7 +15,13 @@ const postFields = /* groq */ `
 
 const linkReference = /* groq */ `
   _type == "link" => {
-    "page": page->slug.current,
+    "page": page->{
+      "slug": slug.current,
+      "fullPath": select(
+        defined(parent) => parent->slug.current + "/" + slug.current,
+        slug.current
+      )
+    }.fullPath,
     "post": post->slug.current
   }
 `
@@ -33,6 +39,11 @@ export const getPageQuery = defineQuery(`
     _type,
     name,
     slug,
+    "parent": parent->{_id, name, "slug": slug.current},
+    "fullPath": select(
+      defined(parent) => "/" + parent->slug.current + "/" + slug.current,
+      "/" + slug.current
+    ),
     heading,
     subheading,
     coverImage,
@@ -90,6 +101,10 @@ export const getPageQuery = defineQuery(`
 export const sitemapData = defineQuery(`
   *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
+    "fullPath": select(
+      _type == "page" && defined(parent) => parent->slug.current + "/" + slug.current,
+      slug.current
+    ),
     _type,
     _updatedAt,
   }
@@ -127,5 +142,12 @@ export const postPagesSlugs = defineQuery(`
 
 export const pagesSlugs = defineQuery(`
   *[_type == "page" && defined(slug.current)]
-  {"slug": slug.current}
+  {
+    "slug": slug.current,
+    "parent": parent->{"slug": slug.current},
+    "fullPath": select(
+      defined(parent) => parent->slug.current + "/" + slug.current,
+      slug.current
+    )
+  }
 `)

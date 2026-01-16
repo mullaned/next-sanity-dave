@@ -6,11 +6,12 @@ import CoverImage from '@/app/components/CoverImage'
 import { PageOnboarding } from '@/app/components/Onboarding'
 import PageBuilderPage from '@/app/components/PageBuilder'
 import { sanityFetch } from '@/sanity/lib/live'
+import { extractSlugFromPath } from '@/sanity/lib/page-utils'
 import { getPageQuery, pagesSlugs } from '@/sanity/lib/queries'
 import type { GetPageQueryResult } from '@/sanity.types'
 
 type Props = {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string[] }>
 }
 
 /**
@@ -24,7 +25,11 @@ export async function generateStaticParams() {
     perspective: 'published',
     stega: false,
   })
-  return data
+
+  // Build slug arrays from fullPath
+  return data.map((page) => ({
+    slug: page.fullPath?.split('/') || [page.slug],
+  }))
 }
 
 /**
@@ -33,9 +38,10 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
+  const slug = extractSlugFromPath(params.slug)
   const { data: page } = await sanityFetch({
     query: getPageQuery,
-    params,
+    params: { slug },
     // Metadata should never contain stega
     stega: false,
   })
@@ -48,7 +54,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const params = await props.params
-  const { data: page } = await sanityFetch({ query: getPageQuery, params })
+  const slug = extractSlugFromPath(params.slug)
+  const { data: page } = await sanityFetch({
+    query: getPageQuery,
+    params: { slug },
+  })
 
   if (!page?._id) {
     return (

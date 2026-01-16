@@ -30,6 +30,21 @@ export const page = defineType({
       },
     }),
     defineField({
+      name: 'parent',
+      title: 'Parent Page',
+      type: 'reference',
+      to: [{ type: 'page' }],
+      description: 'Select a parent page to create a hierarchy. Leave empty for top-level pages.',
+      validation: (Rule) =>
+        Rule.custom((parent, context) => {
+          // Prevent a page from being its own parent
+          if (parent?._ref === context.document?._id) {
+            return 'A page cannot be its own parent'
+          }
+          return true
+        }),
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',

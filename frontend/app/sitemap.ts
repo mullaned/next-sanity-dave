@@ -40,7 +40,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         case 'page':
           priority = 0.8
           changeFrequency = 'monthly'
-          url = `${domain}/${p.slug}`
+          // Use fullPath from GROQ query
+          url = `${domain}/${p.fullPath}`
           break
         case 'post':
           priority = 0.5

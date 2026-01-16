@@ -39,12 +39,17 @@ const homeLocation = {
 
 // resolveHref() is a convenience function that resolves the URL
 // path for different document types and used in the presentation tool.
-function resolveHref(documentType?: string, slug?: string): string | undefined {
+function resolveHref(
+  documentType?: string,
+  slug?: string,
+  parentSlug?: string,
+): string | undefined {
   switch (documentType) {
     case 'post':
       return slug ? `/posts/${slug}` : undefined
     case 'page':
-      return slug ? `/${slug}` : undefined
+      if (!slug) return undefined
+      return parentSlug ? `/${parentSlug}/${slug}` : `/${slug}`
     default:
       console.warn('Invalid document type:', documentType)
       return undefined
@@ -80,6 +85,10 @@ export default defineConfig({
             filter: `_type == "page" && slug.current == $slug || _id == $slug`,
           },
           {
+            route: '/:parent/:slug',
+            filter: `_type == "page" && slug.current == $slug || _id == $slug`,
+          },
+          {
             route: '/posts/:slug',
             filter: `_type == "post" && slug.current == $slug || _id == $slug`,
           },
@@ -95,15 +104,21 @@ export default defineConfig({
             select: {
               name: 'name',
               slug: 'slug.current',
+              parentSlug: 'parent.slug.current',
             },
-            resolve: (doc) => ({
-              locations: [
-                {
-                  title: doc?.name || 'Untitled',
-                  href: resolveHref('page', doc?.slug)!,
-                },
-              ],
-            }),
+            resolve: (doc) => {
+              // Build full path: if parent exists, combine parent/child, else just slug
+              const fullPath = doc?.parentSlug ? `${doc.parentSlug}/${doc.slug}` : doc?.slug
+
+              return {
+                locations: [
+                  {
+                    title: doc?.name || 'Untitled',
+                    href: `/${fullPath}`,
+                  },
+                ],
+              }
+            },
           }),
           post: defineLocations({
             select: {
