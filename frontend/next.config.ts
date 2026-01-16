@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     const isDev = process.env.NODE_ENV === 'development'
-    
+
     // CSP for development - relaxed to allow HMR and dev tools
     const devCSP = [
       "default-src 'self'",
