@@ -42,7 +42,7 @@ describe('SideBySideIcons Component', () => {
     const { container } = render(<SideBySideIcons />)
     const icons = container.querySelectorAll('.aspect-square')
     expect(icons).toHaveLength(2)
-    icons.forEach((icon) => {
+    icons.forEach((icon: Element) => {
       expect(icon).toHaveClass('rounded-full')
     })
   })
@@ -81,7 +81,7 @@ describe('SideBySideIcons Component', () => {
   it('icons have hover scale animations', () => {
     const { container } = render(<SideBySideIcons />)
     const icons = container.querySelectorAll('.aspect-square')
-    icons.forEach((icon) => {
+    icons.forEach((icon: Element) => {
       expect(icon).toHaveClass('group-hover:scale-110')
     })
   })
@@ -89,7 +89,7 @@ describe('SideBySideIcons Component', () => {
   it('renders with correct sizing classes', () => {
     const { container } = render(<SideBySideIcons />)
     const icons = container.querySelectorAll('.aspect-square')
-    icons.forEach((icon) => {
+    icons.forEach((icon: Element) => {
       expect(icon).toHaveClass('w-32', 'h-32')
     })
   })
@@ -97,7 +97,7 @@ describe('SideBySideIcons Component', () => {
   it('icons have border styling', () => {
     const { container } = render(<SideBySideIcons />)
     const icons = container.querySelectorAll('.aspect-square')
-    icons.forEach((icon) => {
+    icons.forEach((icon: Element) => {
       expect(icon).toHaveClass('border-white', 'border-4')
     })
   })
@@ -116,7 +116,7 @@ describe('SideBySideIcons Component', () => {
   it('applies transition classes for animations', () => {
     const { container } = render(<SideBySideIcons />)
     const icons = container.querySelectorAll('.aspect-square')
-    icons.forEach((icon) => {
+    icons.forEach((icon: Element) => {
       expect(icon).toHaveClass('transition-all', 'duration-300')
     })
   })

@@ -12,14 +12,10 @@ export default function Header() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link
-            className="flex items-center gap-2 flex-shrink-0"
-            href="/"
-            aria-label="WAW Farm - Home"
-          >
+          <Link className="flex items-center gap-2 flex-shrink-0" href="/">
             <Image
               src="/images/logo-wide.png"
-              alt="WAW Farm"
+              alt="WAW Farm - Home"
               width={100}
               height={60}
               className="h-10 md:h-12 w-auto"

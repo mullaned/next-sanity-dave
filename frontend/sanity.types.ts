@@ -84,6 +84,30 @@ export type RawHtml = {
   html: Code
 }
 
+export type Seo = {
+  _type: 'seo'
+  metaTitle?: string
+  metaDescription?: string
+  ogTitle?: string
+  ogDescription?: string
+  ogImage?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  canonical?: string
+  keywords?: Array<string>
+  noIndex?: boolean
+}
+
 export type ImageGallery = {
   _type: 'imageGallery'
   title: string
@@ -295,6 +319,7 @@ export type Page = {
     alt?: string
     _type: 'image'
   }
+  seo?: Seo
   pageBuilder?: Array<
     | ({
         _key: string
@@ -625,6 +650,7 @@ export type AllSanitySchemaTypes =
   | VideoPlayer
   | TextPicture
   | RawHtml
+  | Seo
   | ImageGallery
   | HeroSlider
   | CallToAction
@@ -718,7 +744,7 @@ export type SettingsQueryResult = {
   }
 } | null
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    "parent": parent->{_id, name, "slug": slug.current},    "fullPath": select(      defined(parent) => "/" + parent->slug.current + "/" + slug.current,      "/" + slug.current    ),    heading,    subheading,    coverImage,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->{      "slug": slug.current,      "fullPath": select(        defined(parent) => parent->slug.current + "/" + slug.current,        slug.current      )    }.fullPath,    "post": post->slug.current  }      },      },      _type == "heroSlider" => {        slides[]{          _key,          _type,          image{            asset->,            hotspot,            crop,            alt          }        },        heading,        subheading,        buttonText,        buttonLink{          ...,            _type == "link" => {    "page": page->{      "slug": slug.current,      "fullPath": select(        defined(parent) => parent->slug.current + "/" + slug.current,        slug.current      )    }.fullPath,    "post": post->slug.current  }        },        autoplay,        autoplayInterval,        showDots,        showArrows,        height      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->{      "slug": slug.current,      "fullPath": select(        defined(parent) => parent->slug.current + "/" + slug.current,        slug.current      )    }.fullPath,    "post": post->slug.current  }          }        }      },      _type == "videoPlayer" => {        title,        videoUrl,        thumbnail,        aspectRatio,        autoplay,        muted,        loop,        showControls      },      _type == "textPicture" => {        image,        title,        description,        buttonText,        buttonLink{          ...,            _type == "link" => {    "page": page->{      "slug": slug.current,      "fullPath": select(        defined(parent) => parent->slug.current + "/" + slug.current,        slug.current      )    }.fullPath,    "post": post->slug.current  }        },        imagePosition,        backgroundColor      },    },  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    "parent": parent->{_id, name, "slug": slug.current},    "fullPath": select(      defined(parent) => "/" + parent->slug.current + "/" + slug.current,      "/" + slug.current    ),    heading,    subheading,    coverImage,    seo,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->{      "slug": slug.current,      "fullPath": select(        defined(parent) => parent->slug.current + "/" + slug.current,        slug.current      )    }.fullPath,    "post": post->slug.current  }      },      },      _type == "heroSlider" => {        slides[]{          _key,          _type,          image{            asset->,            hotspot,            crop,            alt          }        },        heading,        subheading,        buttonText,        buttonLink{          ...,            _type == "link" => {    "page": page->{      "slug": slug.current,      "fullPath": select(        defined(parent) => parent->slug.current + "/" + slug.current,        slug.current      )    }.fullPath,    "post": post->slug.current  }        },        autoplay,        autoplayInterval,        showDots,        showArrows,        height      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->{      "slug": slug.current,      "fullPath": select(        defined(parent) => parent->slug.current + "/" + slug.current,        slug.current      )    }.fullPath,    "post": post->slug.current  }          }        }      },      _type == "videoPlayer" => {        title,        videoUrl,        thumbnail,        aspectRatio,        autoplay,        muted,        loop,        showControls      },      _type == "textPicture" => {        image,        title,        description,        buttonText,        buttonLink{          ...,            _type == "link" => {    "page": page->{      "slug": slug.current,      "fullPath": select(        defined(parent) => parent->slug.current + "/" + slug.current,        slug.current      )    }.fullPath,    "post": post->slug.current  }        },        imagePosition,        backgroundColor      },    },  }
 export type GetPageQueryResult = {
   _id: string
   _type: 'page'
@@ -745,6 +771,7 @@ export type GetPageQueryResult = {
     alt?: string
     _type: 'image'
   }
+  seo: Seo | null
   pageBuilder: Array<
     | {
         _key: string
@@ -1101,7 +1128,7 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "settings"][0]': SettingsQueryResult
-    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    "parent": parent->{_id, name, "slug": slug.current},\n    "fullPath": select(\n      defined(parent) => "/" + parent->slug.current + "/" + slug.current,\n      "/" + slug.current\n    ),\n    heading,\n    subheading,\n    coverImage,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->{\n      "slug": slug.current,\n      "fullPath": select(\n        defined(parent) => parent->slug.current + "/" + slug.current,\n        slug.current\n      )\n    }.fullPath,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "heroSlider" => {\n        slides[]{\n          _key,\n          _type,\n          image{\n            asset->,\n            hotspot,\n            crop,\n            alt\n          }\n        },\n        heading,\n        subheading,\n        buttonText,\n        buttonLink{\n          ...,\n          \n  _type == "link" => {\n    "page": page->{\n      "slug": slug.current,\n      "fullPath": select(\n        defined(parent) => parent->slug.current + "/" + slug.current,\n        slug.current\n      )\n    }.fullPath,\n    "post": post->slug.current\n  }\n\n        },\n        autoplay,\n        autoplayInterval,\n        showDots,\n        showArrows,\n        height\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->{\n      "slug": slug.current,\n      "fullPath": select(\n        defined(parent) => parent->slug.current + "/" + slug.current,\n        slug.current\n      )\n    }.fullPath,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "videoPlayer" => {\n        title,\n        videoUrl,\n        thumbnail,\n        aspectRatio,\n        autoplay,\n        muted,\n        loop,\n        showControls\n      },\n      _type == "textPicture" => {\n        image,\n        title,\n        description,\n        buttonText,\n        buttonLink{\n          ...,\n          \n  _type == "link" => {\n    "page": page->{\n      "slug": slug.current,\n      "fullPath": select(\n        defined(parent) => parent->slug.current + "/" + slug.current,\n        slug.current\n      )\n    }.fullPath,\n    "post": post->slug.current\n  }\n\n        },\n        imagePosition,\n        backgroundColor\n      },\n    },\n  }\n': GetPageQueryResult
+    '\n  *[_type == \'page\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    "parent": parent->{_id, name, "slug": slug.current},\n    "fullPath": select(\n      defined(parent) => "/" + parent->slug.current + "/" + slug.current,\n      "/" + slug.current\n    ),\n    heading,\n    subheading,\n    coverImage,\n    seo,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->{\n      "slug": slug.current,\n      "fullPath": select(\n        defined(parent) => parent->slug.current + "/" + slug.current,\n        slug.current\n      )\n    }.fullPath,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "heroSlider" => {\n        slides[]{\n          _key,\n          _type,\n          image{\n            asset->,\n            hotspot,\n            crop,\n            alt\n          }\n        },\n        heading,\n        subheading,\n        buttonText,\n        buttonLink{\n          ...,\n          \n  _type == "link" => {\n    "page": page->{\n      "slug": slug.current,\n      "fullPath": select(\n        defined(parent) => parent->slug.current + "/" + slug.current,\n        slug.current\n      )\n    }.fullPath,\n    "post": post->slug.current\n  }\n\n        },\n        autoplay,\n        autoplayInterval,\n        showDots,\n        showArrows,\n        height\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->{\n      "slug": slug.current,\n      "fullPath": select(\n        defined(parent) => parent->slug.current + "/" + slug.current,\n        slug.current\n      )\n    }.fullPath,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "videoPlayer" => {\n        title,\n        videoUrl,\n        thumbnail,\n        aspectRatio,\n        autoplay,\n        muted,\n        loop,\n        showControls\n      },\n      _type == "textPicture" => {\n        image,\n        title,\n        description,\n        buttonText,\n        buttonLink{\n          ...,\n          \n  _type == "link" => {\n    "page": page->{\n      "slug": slug.current,\n      "fullPath": select(\n        defined(parent) => parent->slug.current + "/" + slug.current,\n        slug.current\n      )\n    }.fullPath,\n    "post": post->slug.current\n  }\n\n        },\n        imagePosition,\n        backgroundColor\n      },\n    },\n  }\n': GetPageQueryResult
     '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    "fullPath": select(\n      _type == "page" && defined(parent) => parent->slug.current + "/" + slug.current,\n      slug.current\n    ),\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult

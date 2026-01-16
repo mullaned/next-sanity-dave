@@ -12,7 +12,7 @@ describe('Header Component', () => {
 
   it('renders the logo image', () => {
     render(<Header />)
-    const logo = screen.getByAltText('WAW Farm')
+    const logo = screen.getByAltText('WAW Farm - Home')
     expect(logo).toBeInTheDocument()
   })
 
