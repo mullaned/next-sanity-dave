@@ -27,8 +27,8 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center flex-1 justify-center">
-            <ul className="flex items-center gap-6 lg:gap-8 text-base tracking-tight font-mono">
+          <nav className="hidden md:flex items-center flex-1 justify-start">
+            <ul className="flex items-center gap-6 lg:gap-8 text-base tracking-tight font-mono ml-6">
               <li>
                 <Link href="/house" className="hover:underline">
                   House
@@ -64,7 +64,7 @@ export default function Header() {
             className="md:hidden p-2 text-gray-700 hover:text-gray-900"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
+            {...(mobileMenuOpen ? { 'aria-expanded': true } : { 'aria-expanded': false })}
           >
             <svg
               className="w-6 h-6"
@@ -74,9 +74,8 @@ export default function Header() {
               strokeWidth="2"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              role="img"
+              aria-hidden="true"
             >
-              <title>{mobileMenuOpen ? 'Close menu' : 'Open menu'}</title>
               {mobileMenuOpen ? (
                 <path d="M6 18L18 6M6 6l12 12" />
               ) : (

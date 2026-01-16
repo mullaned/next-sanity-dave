@@ -69,7 +69,7 @@ export default async function Page(props: Props) {
   }
 
   return (
-    <div className="my-12 lg:my-8">
+    <div className="">
       <Head>
         <title>{page.heading}</title>
       </Head>
@@ -90,8 +90,8 @@ export default async function Page(props: Props) {
       {page?.coverImage && (
         <div className="w-full">
           <div className="flex flex-col md:flex-row gap-4 bg-waw-100">
-            <div className="order-2 md:order-1 flex items-center justify-center flex-1">
-              <div className="prose w-1/2">
+            <div className="order-2 md:order-1 flex items-center justify-center flex-1 pb-4">
+              <div className="prose lg:w-1/2">
                 <Image
                   src="/images/logo.png"
                   alt="WAW Farm"

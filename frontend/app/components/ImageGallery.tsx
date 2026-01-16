@@ -81,7 +81,7 @@ export default function ImageGalleryComponent({ block }: ImageGalleryProps) {
         {/* Button */}
         {block.buttonText && block.buttonLink && (
           <Suspense fallback={null}>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center">
               <ResolvedLink
                 link={block.buttonLink}
                 className="rounded-full flex gap-2 items-center bg-black hover:bg-blue focus:bg-blue py-3 px-6 text-white transition-colors duration-200"
