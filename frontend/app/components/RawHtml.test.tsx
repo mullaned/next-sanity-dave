@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-
-import RawHtml from './RawHtml'
 import type { RawHtml as RawHtmlType } from '@/sanity.types'
+import RawHtml from './RawHtml'
 
 describe('RawHtml', () => {
   it('renders sanitized HTML content', () => {
