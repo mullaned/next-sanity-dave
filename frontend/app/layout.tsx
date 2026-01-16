@@ -80,7 +80,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           Skip to main content
         </a>
         <CookieConsentProvider>
-          <section className="min-h-screen pt-24">
+          <section className="min-h-screen pt-16 md:pt-20">
             {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
             <Toaster />
             {!isDev && <CookieConsent />}
