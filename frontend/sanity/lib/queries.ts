@@ -67,7 +67,8 @@ export const getPageQuery = defineQuery(`
         subheading,
         buttonText,
         buttonLink{
-          ${linkFields}
+          ...,
+          ${linkReference}
         },
         autoplay,
         autoplayInterval,
