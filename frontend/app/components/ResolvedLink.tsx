@@ -22,6 +22,7 @@ export default function ResolvedLink({ link, children, className }: ResolvedLink
         className={className}
       >
         {children}
+        {link?.openInNewTab && <span className="sr-only"> (opens in a new tab)</span>}
       </Link>
     )
   }

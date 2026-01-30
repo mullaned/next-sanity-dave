@@ -244,9 +244,12 @@ describe('HeroSliderComponent', () => {
       const mockBlock = createMockBlock()
       render(<HeroSliderComponent block={mockBlock} />)
 
+      const slider = screen.getByLabelText('Hero slider')
+      slider.focus()
+
       expect(screen.getByText('Slide 1 of 2')).toBeTruthy()
 
-      fireEvent.keyDown(document, { key: 'ArrowRight' })
+      fireEvent.keyDown(slider, { key: 'ArrowRight' })
 
       expect(screen.getByText('Slide 2 of 2')).toBeTruthy()
     })
@@ -255,7 +258,10 @@ describe('HeroSliderComponent', () => {
       const mockBlock = createMockBlock()
       render(<HeroSliderComponent block={mockBlock} />)
 
-      fireEvent.keyDown(document, { key: 'ArrowLeft' })
+      const slider = screen.getByLabelText('Hero slider')
+      slider.focus()
+
+      fireEvent.keyDown(slider, { key: 'ArrowLeft' })
 
       expect(screen.getByText('Slide 2 of 2')).toBeTruthy()
     })

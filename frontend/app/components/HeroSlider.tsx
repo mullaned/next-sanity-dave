@@ -1,6 +1,6 @@
 'use client'
 
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react'
 import Image from 'next/image'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -64,17 +64,18 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
   }, [autoplay, autoplayInterval, nextSlide, totalSlides, isPaused])
 
   // Keyboard navigation
-  useEffect(() => {
-    if (totalSlides <= 1) return
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (totalSlides <= 1) return
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') prevSlide()
-      else if (e.key === 'ArrowRight') nextSlide()
-    }
-
-    globalThis.addEventListener('keydown', handleKeyDown)
-    return () => globalThis.removeEventListener('keydown', handleKeyDown)
-  }, [nextSlide, prevSlide, totalSlides])
+      if (e.key === 'ArrowLeft') {
+        prevSlide()
+      } else if (e.key === 'ArrowRight') {
+        nextSlide()
+      }
+    },
+    [totalSlides, prevSlide, nextSlide],
+  )
 
   if (totalSlides === 0) {
     return (
@@ -95,6 +96,9 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
       className={`relative w-full ${heightClass} overflow-hidden`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onKeyDown={handleKeyDown}
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: Keyboard navigation for slider
+      tabIndex={0}
     >
       {/* Slides */}
       {slides.map((slide: any, index: number) => {
@@ -105,6 +109,7 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
         return (
           <div
             key={slide._key || index}
+            aria-hidden={!isActive}
             className={`absolute inset-0 transition-opacity duration-500 ${
               isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
@@ -187,20 +192,38 @@ export default function HeroSliderComponent({ block }: HeroSliderProps) {
         </>
       )}
 
-      {/* Navigation Dots */}
+      {/* Navigation Dots and Autoplay Control */}
       {showDots && totalSlides > 1 && (
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3">
-          {slides.map((slide: any, index: number) => (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-4">
+          <div className="flex gap-3">
+            {slides.map((slide: any, index: number) => (
+              <button
+                key={slide._key || `dot-${index}`}
+                onClick={() => goToSlide(index)}
+                className={`h-3 rounded-full transition-all duration-200 ${
+                  index === currentSlide ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/75 w-3'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-current={index === currentSlide ? 'true' : 'false'}
+                type="button"
+              />
+            ))}
+          </div>
+
+          {autoplay && (
             <button
-              key={slide._key || `dot-${index}`}
-              onClick={() => goToSlide(index)}
-              className={`h-3 rounded-full transition-all duration-200 ${
-                index === currentSlide ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/75 w-3'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
+              onClick={() => setIsPaused(!isPaused)}
+              className="text-white hover:text-white/90 bg-black/50 hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black rounded-full p-1.5 transition-colors"
+              aria-label={isPaused ? 'Start autoplay' : 'Pause autoplay'}
               type="button"
-            />
-          ))}
+            >
+              {isPaused ? (
+                <Play className="w-4 h-4 fill-current" />
+              ) : (
+                <Pause className="w-4 h-4 fill-current" />
+              )}
+            </button>
+          )}
         </div>
       )}
 

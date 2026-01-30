@@ -119,7 +119,7 @@ export default function CookieConsent() {
                   <button
                     type="button"
                     onClick={handleAcceptAll}
-                    className="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-600 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+                    className="px-6 py-2.5 bg-cyan-700 hover:bg-cyan-800 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:ring-offset-2"
                     aria-label="Accept all cookies"
                   >
                     Accept All
@@ -189,8 +189,8 @@ export default function CookieConsent() {
                   role="switch"
                   aria-checked={localAnalytics}
                   onClick={() => setLocalAnalytics(!localAnalytics)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 ${
-                    localAnalytics ? 'bg-cyan-500' : 'bg-gray-300'
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:ring-offset-2 ${
+                    localAnalytics ? 'bg-cyan-700' : 'bg-gray-300'
                   }`}
                   aria-label="Toggle analytics cookies"
                 >
@@ -220,8 +220,8 @@ export default function CookieConsent() {
                   role="switch"
                   aria-checked={localMedia}
                   onClick={() => setLocalMedia(!localMedia)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 ${
-                    localMedia ? 'bg-cyan-500' : 'bg-gray-300'
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:ring-offset-2 ${
+                    localMedia ? 'bg-cyan-700' : 'bg-gray-300'
                   }`}
                   aria-label="Toggle media cookies"
                 >
@@ -244,7 +244,7 @@ export default function CookieConsent() {
             <button
               type="button"
               onClick={handleSaveSettings}
-              className="flex-1 px-6 py-2.5 bg-cyan-500 hover:bg-cyan-600 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
+              className="flex-1 px-6 py-2.5 bg-cyan-700 hover:bg-cyan-800 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-700 focus:ring-offset-2"
               aria-label="Save cookie preferences"
             >
               Save Preferences
