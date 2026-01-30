@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/mullaned/next-sanity-dave/compare/v1.3.0...v1.4.0) (2026-01-30)
+
+
+### Features
+
+* ai agent config ([fba7f67](https://github.com/mullaned/next-sanity-dave/commit/fba7f673db95ede1ea30ac2f644904b0822e6d13))
+
 # [1.3.0](https://github.com/mullaned/next-sanity-dave/compare/v1.2.0...v1.3.0) (2026-01-16)
 
 
